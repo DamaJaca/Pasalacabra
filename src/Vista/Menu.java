@@ -1,6 +1,7 @@
 package Vista;
 
 
+import Modelo.Usuario;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -22,7 +23,7 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
-    public Menu() {
+    public Menu(Usuario user) {
         initComponents();
     }
 
@@ -408,7 +409,7 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+                new Menu(users.get(i)).setVisible(true);
             }
         });
     }
