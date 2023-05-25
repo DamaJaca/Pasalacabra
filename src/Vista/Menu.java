@@ -30,6 +30,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu(Usuario usuario) {
         initComponents();
         Image icon = new ImageIcon(getClass().getResource("cabra(2).png")).getImage();
+        this.setIconImage(icon);
         user = new Usuario(usuario.getNombre(), usuario.getContraseña(), usuario.getPuntuacion());
     }
     /**
@@ -368,13 +369,13 @@ public class Menu extends javax.swing.JFrame {
                     System.out.println("NO FUNCIONA LA MIERDA ESTA");
                 }
             }else {
-                Dificil partida;
+                /*Dificil partida;
                 try{
                     partida = new Dificil (jLabel9.getText(), user);
                     partida.setVisible(true);
                 } catch (SQLException ex) {
                     System.out.println("NO FUNCIONA LA MIERDA ESTA");
-                }
+                }*/
             }
             this.dispose();
         }

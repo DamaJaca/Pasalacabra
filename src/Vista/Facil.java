@@ -6,6 +6,7 @@ package Vista;
  */
 import Controlador.ConexionMySQL;
 import Controlador.ControladorLista;
+import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,14 +42,16 @@ public class Facil extends javax.swing.JFrame {
     private Timer crono2;
     private int centesimas = 99;
     private int segundos = 5;
+    Usuario user;
 
-    public Facil(String listas) throws SQLException {
+    public Facil(String listas, Usuario usuario) throws SQLException {
         initComponents();
         // colocamos en false los enable para que el jugador no pueda interactuar con los botones hasta que no empiece a jugar
         b1.setEnabled(false);
         b2.setEnabled(false);
         b3.setEnabled(false);
         b4.setEnabled(false);
+        user = usuario;
         conexion = new ConexionMySQL("pasapalabra", "root", "");
         controlador = new ControladorLista(conexion);
         conexion.conectar();

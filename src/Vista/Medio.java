@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.ConexionMySQL;
 import Controlador.ControladorLista;
+import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,10 +41,12 @@ public class Medio extends javax.swing.JFrame {
     private Timer crono2;
     private int centesimas=99;
     private int segundos=10;
+    Usuario user;
 
-    public Medio(String listas) throws SQLException {
+    public Medio(String listas, Usuario usuario) throws SQLException {
         initComponents();
         activarBotones();
+        user=usuario;
         bComenzar.setEnabled(true);
         conexion = new ConexionMySQL("pasapalabra", "root", "");   
         controlador = new ControladorLista(conexion);
