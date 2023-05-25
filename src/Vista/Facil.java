@@ -8,16 +8,20 @@ import Controlador.ConexionMySQL;
 import Controlador.ControladorLista;
 import Modelo.Usuario;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.RoundRectangle2D;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.plaf.basic.BasicProgressBarUI;
 
 /**
  *
@@ -41,7 +45,7 @@ public class Facil extends javax.swing.JFrame {
     private Timer crono1;
     private Timer crono2;
     private int centesimas = 99;
-    private int segundos = 5;
+    private int segundos = 4;
     Usuario user;
 
     public Facil(String listas, Usuario usuario) throws SQLException {
@@ -60,6 +64,30 @@ public class Facil extends javax.swing.JFrame {
         contador = 0;
         crono1 = new Timer(10, acciones);
         crono2 = new Timer(10, accionesC2);
+        
+        pbCrono1.setUI(new BasicProgressBarUI(){
+            @Override
+            protected void paintDeterminate(Graphics g, JComponent c) {
+                Graphics2D g2d = (Graphics2D) g;
+                int ancho = (int) (pbCrono1.getWidth()*pbCrono1.getPercentComplete());
+                int alto = pbCrono1.getHeight();
+                g2d.setColor(Color.GREEN);
+                RoundRectangle2D barra = new RoundRectangle2D.Double(0,0,ancho,alto,0,0);
+                g2d.fill(barra);
+            }
+        });   
+        
+        pbCrono2.setUI(new BasicProgressBarUI(){
+            @Override
+            protected void paintDeterminate(Graphics g, JComponent c) {
+                Graphics2D g2d = (Graphics2D) g;
+                int ancho = (int) (pbCrono2.getWidth()*pbCrono2.getPercentComplete());
+                int alto = pbCrono2.getHeight();
+                g2d.setColor(Color.GREEN);
+                RoundRectangle2D barra = new RoundRectangle2D.Double(0,0,ancho,alto,0,0);
+                g2d.fill(barra);
+            }
+        });
     }
     //Métodos
 
@@ -88,22 +116,43 @@ public class Facil extends javax.swing.JFrame {
     public void actualizarRojo() {
         jTCrono.setForeground(Color.red);
     }
+       
     public void mensajeDerrota(){
     JOptionPane.showMessageDialog(this, "Has perdido Carajaula");
     
     
     }
-
-    public void actualizarCrono() {
-        centesimas--;
-        if (centesimas == 0) {
-            segundos--;
-            centesimas = 99;
-        }
-
-        actualizarTiempo();
+    
+    public void modificarBarra1(){
+        pbCrono1.setValue(pbCrono1.getValue()-1);
     }
-
+    
+    public void vaciarBarra1(){
+        pbCrono1.setValue(0);
+    }
+    
+    public void modificarBarra2(){
+        pbCrono2.setValue(pbCrono2.getValue()-1);
+    }
+    
+    public void vaciarBarra2(){
+        pbCrono2.setValue(0);
+    }
+    
+    public void BarraRoja(){
+        pbCrono2.setUI(new BasicProgressBarUI(){
+            @Override
+            protected void paintDeterminate(Graphics g, JComponent c) {
+                Graphics2D g2d = (Graphics2D) g;
+                int ancho = (int) (pbCrono2.getWidth()*pbCrono2.getPercentComplete());
+                int alto = pbCrono2.getHeight();
+                g2d.setColor(Color.RED);
+                RoundRectangle2D barra = new RoundRectangle2D.Double(0,0,ancho,alto,0,0);
+                g2d.fill(barra);
+            }
+        });
+    }
+    
     public void ocultarPalabra() {
         b1.setText("1");
         b2.setText("2");
@@ -112,12 +161,13 @@ public class Facil extends javax.swing.JFrame {
         jTextField1.setText(listaAux.get(index));
         
     }
-
+    
     private ActionListener acciones = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
 
             centesimas--;
+            modificarBarra1();
             if (centesimas == 0) {
                 segundos--;
                 centesimas = 99;
@@ -129,6 +179,7 @@ public class Facil extends javax.swing.JFrame {
                 crono1.stop();
                 centesimas = 99;
                 segundos=19;
+                vaciarBarra1();
                 activarBotones();
                 ocultarPalabra();
                 crono2.start();
@@ -144,14 +195,16 @@ public class Facil extends javax.swing.JFrame {
     private ActionListener accionesC2 = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {              
-                centesimas --;           
+                centesimas --;          
+                modificarBarra2();
                 if (centesimas == 0) {
                     segundos--;
                     centesimas=99;
                 }
                 
-                if (segundos == 10) {
+                if (segundos == 5) {
                     actualizarRojo();
+                    BarraRoja();
                 }
                 
                 actualizarTiempo();
@@ -159,6 +212,7 @@ public class Facil extends javax.swing.JFrame {
                 if (segundos==0 && centesimas == 1) {
                     crono2.stop();
                     centesimas=0;
+                    vaciarBarra2();
                     actualizarTiempo();
                     desactivarBotones();
                     mensajeDerrota();
@@ -184,6 +238,8 @@ public class Facil extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         bComenzar = new javax.swing.JButton();
         jTCrono = new javax.swing.JTextField();
+        pbCrono2 = new javax.swing.JProgressBar();
+        pbCrono1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
@@ -264,6 +320,14 @@ public class Facil extends javax.swing.JFrame {
             }
         });
 
+        pbCrono2.setBackground(new java.awt.Color(153, 204, 255));
+        pbCrono2.setMaximum(2000);
+        pbCrono2.setValue(1999);
+
+        pbCrono1.setBackground(new java.awt.Color(153, 204, 255));
+        pbCrono1.setMaximum(500);
+        pbCrono1.setValue(499);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -281,9 +345,12 @@ public class Facil extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(155, 155, 155)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bComenzar, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
-                    .addComponent(jTCrono))
+                    .addComponent(pbCrono1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTCrono, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(bComenzar, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                        .addComponent(jTextField1)
+                        .addComponent(pbCrono2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -293,21 +360,23 @@ public class Facil extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(b2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jTCrono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bComenzar)
-                        .addGap(28, 129, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(b4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(b3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pbCrono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTCrono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pbCrono2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bComenzar)
+                .addGap(110, 110, 110))
         );
 
         getContentPane().add(jPanel3);
@@ -516,11 +585,11 @@ public class Facil extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
+                /*try {
                     new Facil(listas).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Facil.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }*/
             }
         });
     }
@@ -534,5 +603,7 @@ public class Facil extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTCrono;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JProgressBar pbCrono1;
+    private javax.swing.JProgressBar pbCrono2;
     // End of variables declaration//GEN-END:variables
 }
