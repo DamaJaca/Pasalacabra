@@ -369,13 +369,14 @@ public class Menu extends javax.swing.JFrame {
                     System.out.println("NO FUNCIONA LA MIERDA ESTA");
                 }
             }else {
-                /*Dificil partida;
-                try{
+                Dificil partida;
+                try {
                     partida = new Dificil (jLabel9.getText(), user);
+                    System.out.println("Funca");
                     partida.setVisible(true);
                 } catch (SQLException ex) {
                     System.out.println("NO FUNCIONA LA MIERDA ESTA");
-                }*/
+                }
             }
             this.dispose();
         }
@@ -456,7 +457,7 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu(users.get(i)).setVisible(true);
+                //new Menu(users.get(i)).setVisible(true);
             }
         });
     }

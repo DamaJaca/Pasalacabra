@@ -6,6 +6,7 @@ package Vista;
 
 import Controlador.ConexionMySQL;
 import Controlador.ControladorLista;
+import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,14 +34,18 @@ public class Dificil extends javax.swing.JFrame {
 // se crea una lista auxiliar donde vamos a guardar los datos para el random
     int index = 0;
     ArrayList<String> lista;
-    
+
     private Timer crono1;
     private Timer crono2;
-    private int centesimas=99;
-    private int segundos=3;
-    
-    public Dificil(String listas) throws SQLException {
+    private int centesimas = 99;
+    private int segundos = 3;
+    private int puntuacion = 0;
+    private int maxPunt = 0;
+    Usuario usu;
+
+    public Dificil(String listas, Usuario user) throws SQLException {
         System.out.println("aasiadsu");
+        usu = user;
         initComponents();
         arrayBotones();
         desactivar();
@@ -51,12 +56,18 @@ public class Dificil extends javax.swing.JFrame {
         crono1 = new Timer(10, accionesC1);
         crono2 = new Timer(10, accionesC2);
     }
-    
-    public void actualizarTiempo(){
-        String tiempo = (segundos<=9?"0":"")+segundos+":"+(centesimas<=9?"0":"")+centesimas;
+
+    public void actualizarTiempo() {
+        String tiempo = (segundos <= 9 ? "0" : "") + segundos + ":" + (centesimas <= 9 ? "0" : "") + centesimas;
         jTextField2.setText(tiempo);
     }
     
+    public void gestorPunt() {
+        if(puntuacion>maxPunt)
+            maxPunt = puntuacion;
+        puntuacion = 0;
+    }
+
     public void mensajeDerrota() {
         JOptionPane.showMessageDialog(this, "Has perdido pedazo de CARICHIMBA");
     }
@@ -79,18 +90,18 @@ public class Dificil extends javax.swing.JFrame {
         }
     }
 
-    public void ocultarTexto(){
+    public void ocultarTexto() {
         String text;
         for (int i = 0; i < botones.size(); i++) {
-            text = String.valueOf(i+1);
+            text = String.valueOf(i + 1);
             botones.get(i).setText(text);
         }
     }
-    
-    public void actualizarRojo(){
+
+    public void actualizarRojo() {
         jTextField2.setForeground(Color.red);
     }
-    
+
     private void arrayBotones() {
         botones.add(jButton1);
         botones.add(jButton2);
@@ -109,56 +120,54 @@ public class Dificil extends javax.swing.JFrame {
         botones.add(jButton15);
         botones.add(jButton16);
     }
-    
+
     private ActionListener accionesC1 = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-                centesimas --;           
-                if (centesimas == 0) {
-                    segundos--;
-                    centesimas=99;
-                }
-                
-                actualizarTiempo();
-                
-                if (segundos==0 && centesimas == 1) {
-                    centesimas = 99;
-                    segundos = 29;
-                    crono1.stop();
-                    activar();
-                    ocultarTexto();
-                    crono2.start();
-                }
-                
+            centesimas--;
+            if (centesimas == 0) {
+                segundos--;
+                centesimas = 99;
+            }
+
+            actualizarTiempo();
+
+            if (segundos == 0 && centesimas == 1) {
+                centesimas = 99;
+                segundos = 29;
+                crono1.stop();
+                activar();
+                ocultarTexto();
+                jTextField1.setText(listaAux.get(index));
+                crono2.start();
+            }
+
         }
     };
 
     private ActionListener accionesC2 = new ActionListener() {
         @Override
-        public void actionPerformed(ActionEvent e) {              
-                centesimas --;           
-                if (centesimas == 0) {
-                    segundos--;
-                    centesimas=99;
-                }
-                
-                if (segundos == 10) {
-                    actualizarRojo();
-                }
-                
+        public void actionPerformed(ActionEvent e) {
+            centesimas--;
+            if (centesimas == 0) {
+                segundos--;
+                centesimas = 99;
+            }
+            if (segundos == 10) {
+                actualizarRojo();
+            }
+            actualizarTiempo();
+            if (segundos == 0 && centesimas == 1) {
+                crono2.stop();
+                centesimas = 0;
                 actualizarTiempo();
-                
-                if (segundos==0 && centesimas == 1) {
-                    crono2.stop();
-                    centesimas=0;
-                    actualizarTiempo();
-                    desactivar();
-                    mensajeDerrota();
-                }
-                
+                desactivar();
+                mensajeDerrota();
+            }
+
         }
     };
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,6 +196,7 @@ public class Dificil extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton17 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
+        jButton18 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -407,6 +417,13 @@ public class Dificil extends javax.swing.JFrame {
             }
         });
 
+        jButton18.setText("Volver");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -414,50 +431,49 @@ public class Dificil extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(4, 4, 4)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(4, 4, 4)
-                                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(132, 132, 132))))
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,11 +504,13 @@ public class Dificil extends javax.swing.JFrame {
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton17)
-                .addGap(16, 16, 16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton18)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -501,7 +519,7 @@ public class Dificil extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
 
-       
+
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -511,19 +529,26 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton1.setText(lista.get(0));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton1.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            jTextField1.setText(listaAux.get(index));
+            ocultarTexto();
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -531,21 +556,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(1).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton2.setText(lista.get(1));
+                jTextField1.setText(listaAux.get(index));
+                jButton2.setText(lista.get(1));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton2.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            jTextField1.setText(listaAux.get(index));
             activar();
+            ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -553,21 +585,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(2).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton3.setText(lista.get(2));
+                jTextField1.setText(listaAux.get(index));
+                jButton3.setText(lista.get(2));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton3.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            jTextField1.setText(listaAux.get(index));
             activar();
+            ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -575,21 +614,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(3).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton4.setText(lista.get(3));
+                jTextField1.setText(listaAux.get(index));
+                jButton4.setText(lista.get(3));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton4.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            jTextField1.setText(listaAux.get(index));
             activar();
+            ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -597,21 +643,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(4).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton5.setText(lista.get(4));
+                jTextField1.setText(listaAux.get(index));
+                jButton5.setText(lista.get(4));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton5.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            jTextField1.setText(listaAux.get(index));
             activar();
+            ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -619,21 +672,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(5).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton6.setText(lista.get(5));
+                jTextField1.setText(listaAux.get(index));
+                jButton6.setText(lista.get(5));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton6.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            jTextField1.setText(listaAux.get(index));
             activar();
+            ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton7MouseClicked
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -641,21 +701,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(6).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton7.setText(lista.get(6));
+                jTextField1.setText(listaAux.get(index));
+                jButton7.setText(lista.get(6));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton7.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            jTextField1.setText(listaAux.get(index));
             activar();
+            ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton8MouseClicked
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -663,21 +730,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(7).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton8.setText(lista.get(7));
+                jTextField1.setText(listaAux.get(index));
+                jButton8.setText(lista.get(7));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton8.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            ocultarTexto();
+            jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton12MouseClicked
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -685,21 +759,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(11).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton12.setText(lista.get(11));
+                jTextField1.setText(listaAux.get(index));
+                jButton12.setText(lista.get(11));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton12.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            ocultarTexto();
+            jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton10MouseClicked
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -707,21 +788,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(9).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton10.setText(lista.get(9));
+                jTextField1.setText(listaAux.get(index));
+                jButton10.setText(lista.get(9));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton10.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            ocultarTexto();
+            jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton11MouseClicked
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -729,21 +817,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(10).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton11.setText(lista.get(10));
+                jTextField1.setText(listaAux.get(index));
+                jButton11.setText(lista.get(10));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton11.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            ocultarTexto();
+            jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton9MouseClicked
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -751,21 +846,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(8).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton9.setText(lista.get(8));
+                jTextField1.setText(listaAux.get(index));
+                jButton9.setText(lista.get(8));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton9.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            ocultarTexto();
+            jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton16MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton16MouseClicked
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
@@ -773,21 +875,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(15).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton16.setText(lista.get(15));
+                jTextField1.setText(listaAux.get(index));
+                jButton16.setText(lista.get(15));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton16.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            ocultarTexto();
+            jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton14MouseClicked
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
@@ -795,21 +904,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(13).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton14.setText(lista.get(13));
+                jTextField1.setText(listaAux.get(index));
+                jButton14.setText(lista.get(13));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton14.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            ocultarTexto();
+            jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton15MouseClicked
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
@@ -817,21 +933,28 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(14).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton15.setText(lista.get(14));
+                jTextField1.setText(listaAux.get(index));
+                jButton15.setText(lista.get(14));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton15.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            jTextField1.setText(listaAux.get(index));
             activar();
+            ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton13MouseClicked
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -839,15 +962,22 @@ public class Dificil extends javax.swing.JFrame {
         if (lista.get(12).equals(jTextField1.getText())) {
             index++;
             if (index != 16) {
-            jTextField1.setText(listaAux.get(index));
-            jButton13.setText(lista.get(12));
+                jTextField1.setText(listaAux.get(index));
+                jButton13.setText(lista.get(12));
+                puntuacion++;
+            }else{
+                crono2.stop();
+                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton13.setEnabled(false);
 
         } else {
             index = 0;
-            jTextField1.setText(lista.get(index));
+            jTextField1.setText(listaAux.get(index));
             activar();
+            ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton13ActionPerformed
 
@@ -861,7 +991,6 @@ public class Dificil extends javax.swing.JFrame {
         crono1.start();
         listaAux.clear();
         index = 0;
-        activar();
 
         Collections.shuffle(lista);
         for (int i = 0; i <= 15; i++) {
@@ -871,13 +1000,24 @@ public class Dificil extends javax.swing.JFrame {
         System.out.println(listaAux);
         System.out.println(lista);
         texto(listaAux);
-        jTextField1.setText(listaAux.get(index));
+        jButton17.setEnabled(false);
 
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        // TODO add your handling code here:
+        gestorPunt();
+        if(usu.getPuntuacion() < maxPunt){
+            usu.setPuntuacion(maxPunt);
+        }
+        Menu menu = new Menu(usu);
+        this.setVisible(false);
+        menu.setVisible(true);
+    }//GEN-LAST:event_jButton18ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -924,6 +1064,7 @@ public class Dificil extends javax.swing.JFrame {
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
