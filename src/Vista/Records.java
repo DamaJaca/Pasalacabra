@@ -5,9 +5,13 @@
 package Vista;
 
 import Controlador.ConexionMySQL;
+import Controlador.ControladorUsuario;
+import Modelo.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,9 +25,12 @@ public class Records extends javax.swing.JFrame {
      * Creates new form Records
      */
     private ConexionMySQL conexion;
-    public Records() {
+    static ControladorUsuario controlador;
+    public Records() throws SQLException {
         initComponents();
-        conexion = new ConexionMySQL("root","","compra");
+        conexion = new ConexionMySQL("pasapalabra","root","");
+        controlador = new ControladorUsuario(conexion);
+        conexion.conectar();
     }
 
     /**
@@ -52,7 +59,6 @@ public class Records extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 204));
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jButton1.setBackground(new java.awt.Color(153, 204, 255));
@@ -94,7 +100,6 @@ public class Records extends javax.swing.JFrame {
         jPanel2.add(jButton3, gridBagConstraints);
 
         jTable1.setBackground(new java.awt.Color(0, 153, 204));
-        jTable1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         jTable1.setFont(new java.awt.Font("MV Boli", 1, 12)); // NOI18N
         jTable1.setForeground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -109,7 +114,6 @@ public class Records extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel4.setBackground(new java.awt.Color(0, 204, 204));
-        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
 
         jLabel1.setFont(new java.awt.Font("MV Boli", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -148,7 +152,7 @@ public class Records extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(41, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,11 +173,10 @@ public class Records extends javax.swing.JFrame {
             String mensaje = "Se ha conectado a la BBDD correctamente";
             JOptionPane.showMessageDialog(null,mensaje);
         } catch(SQLException ex){
-            ex.printStackTrace();
         }
         ControladorUsuario controladora = new ControladorUsuario(conexion);
         try{
-            ArrayList <Usuario> lista = controladora.obtenerTodosUsuarios("usuarios");
+            ArrayList <Usuario> lista = controladora.obtenerUsuario();
             DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
             int fila = 0, posi=0;
             for(Usuario usuario:lista){
@@ -181,11 +184,10 @@ public class Records extends javax.swing.JFrame {
                 posi++;
                 modelo.setValueAt(posi, fila, 0);
                 modelo.setValueAt(usuario.getNombre(), fila, 1);
-                modelo.setValueAt(usuario.getPuncuation(), fila, 2);
+                modelo.setValueAt(usuario.getPuntuacion(), fila, 2);
                 fila++;
             }
         } catch(SQLException ex){
-            ex.printStackTrace();
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -193,42 +195,34 @@ public class Records extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // Boton Puntuacion:
         ControladorUsuario controladora = new ControladorUsuario(conexion);
-        try{
-            ArrayList <Usuario> lista = controladora.obtenerTodosUsuarios("usuarios");
-            DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
-            Collections.sort(lista);
-            int fila = 0, posi=0;
-            for(Usuario usuario:lista){
-                modelo.setNumRows(modelo.getRowCount()+1);
-                posi++;
-                modelo.setValueAt(posi, fila, 0);
-                modelo.setValueAt(usuario.getNombre(), fila, 1);
-                modelo.setValueAt(usuario.getPuncuation(), fila, 2);
-                fila++;
-            }
-        } catch(SQLException ex){
-            ex.printStackTrace();
+        ArrayList <Usuario> lista = controladora.obtenerUsuario();
+        DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
+        Collections.sort(lista);
+        int fila = 0, posi=0;
+        for(Usuario usuario:lista){
+            modelo.setNumRows(modelo.getRowCount()+1);
+            posi++;
+            modelo.setValueAt(posi, fila, 0);
+            modelo.setValueAt(usuario.getNombre(), fila, 1);
+            modelo.setValueAt(usuario.getPuntuacion(), fila, 2);
+            fila++;
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Boton Nombre:
         ControladorUsuario controladora = new ControladorUsuario(conexion);
-        try{
-            ArrayList <Usuario> lista = controladora.obtenerTodosUsuarios("usuarios");
-            DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
-            Collections.sort(lista);
-            int fila = 0, posi=0;
-            for(Usuario usuario:lista){
-                modelo.setNumRows(modelo.getRowCount()+1);
-                posi++;
-                modelo.setValueAt(posi, fila, 0);
-                modelo.setValueAt(usuario.getNombre(), fila, 1);
-                modelo.setValueAt(usuario.getPuncuation(), fila, 2);
-                fila++;
-            }
-        } catch(SQLException ex){
-            ex.printStackTrace();
+        ArrayList <Usuario> lista = controladora.obtenerUsuario();
+        DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
+        Collections.sort(lista);
+        int fila = 0, posi=0;
+        for(Usuario usuario:lista){
+            modelo.setNumRows(modelo.getRowCount()+1);
+            posi++;
+            modelo.setValueAt(posi, fila, 0);
+            modelo.setValueAt(usuario.getNombre(), fila, 1);
+            modelo.setValueAt(usuario.getPuntuacion(), fila, 2);
+            fila++;
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -260,9 +254,11 @@ public class Records extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
                 new Records().setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(Records.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
