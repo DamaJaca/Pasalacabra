@@ -39,9 +39,13 @@ public class Dificil extends javax.swing.JFrame {
     private Timer crono2;
     private int centesimas = 99;
     private int segundos = 3;
+    private int puntuacion = 0;
+    private int maxPunt = 0;
+    Usuario usu;
 
     public Dificil(String listas, Usuario user) throws SQLException {
         System.out.println("aasiadsu");
+        usu = user;
         initComponents();
         arrayBotones();
         desactivar();
@@ -56,6 +60,12 @@ public class Dificil extends javax.swing.JFrame {
     public void actualizarTiempo() {
         String tiempo = (segundos <= 9 ? "0" : "") + segundos + ":" + (centesimas <= 9 ? "0" : "") + centesimas;
         jTextField2.setText(tiempo);
+    }
+    
+    public void gestorPunt() {
+        if(puntuacion>maxPunt)
+            maxPunt = puntuacion;
+        puntuacion = 0;
     }
 
     public void mensajeDerrota() {
@@ -128,6 +138,7 @@ public class Dificil extends javax.swing.JFrame {
                 crono1.stop();
                 activar();
                 ocultarTexto();
+                jTextField1.setText(listaAux.get(index));
                 crono2.start();
             }
 
@@ -185,6 +196,7 @@ public class Dificil extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton17 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
+        jButton18 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -405,6 +417,13 @@ public class Dificil extends javax.swing.JFrame {
             }
         });
 
+        jButton18.setText("Volver");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -412,50 +431,49 @@ public class Dificil extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(4, 4, 4)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(4, 4, 4)
-                                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(132, 132, 132))))
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,11 +504,13 @@ public class Dificil extends javax.swing.JFrame {
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton17)
-                .addGap(16, 16, 16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton18)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -509,9 +529,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton1.setText(lista.get(0));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton1.setEnabled(false);
 
@@ -520,6 +542,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             ocultarTexto();
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -535,9 +558,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton2.setText(lista.get(1));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton2.setEnabled(false);
 
@@ -546,6 +571,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             activar();
             ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -561,9 +587,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton3.setText(lista.get(2));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton3.setEnabled(false);
 
@@ -572,6 +600,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             activar();
             ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -587,9 +616,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton4.setText(lista.get(3));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton4.setEnabled(false);
 
@@ -598,6 +629,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             activar();
             ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -613,9 +645,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton5.setText(lista.get(4));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton5.setEnabled(false);
 
@@ -624,6 +658,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             activar();
             ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -639,9 +674,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton6.setText(lista.get(5));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton6.setEnabled(false);
 
@@ -650,6 +687,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             activar();
             ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -665,9 +703,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton7.setText(lista.get(6));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton7.setEnabled(false);
 
@@ -676,6 +716,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             activar();
             ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -691,9 +732,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton8.setText(lista.get(7));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton8.setEnabled(false);
 
@@ -702,6 +745,7 @@ public class Dificil extends javax.swing.JFrame {
             ocultarTexto();
             jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -717,9 +761,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton12.setText(lista.get(11));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton12.setEnabled(false);
 
@@ -728,6 +774,7 @@ public class Dificil extends javax.swing.JFrame {
             ocultarTexto();
             jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton12ActionPerformed
 
@@ -743,9 +790,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton10.setText(lista.get(9));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton10.setEnabled(false);
 
@@ -754,6 +803,7 @@ public class Dificil extends javax.swing.JFrame {
             ocultarTexto();
             jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -769,9 +819,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton11.setText(lista.get(10));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton11.setEnabled(false);
 
@@ -780,6 +832,7 @@ public class Dificil extends javax.swing.JFrame {
             ocultarTexto();
             jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
@@ -795,9 +848,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton9.setText(lista.get(8));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton9.setEnabled(false);
 
@@ -806,6 +861,7 @@ public class Dificil extends javax.swing.JFrame {
             ocultarTexto();
             jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -821,9 +877,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton16.setText(lista.get(15));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton16.setEnabled(false);
 
@@ -832,6 +890,7 @@ public class Dificil extends javax.swing.JFrame {
             ocultarTexto();
             jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 
@@ -847,9 +906,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton14.setText(lista.get(13));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton14.setEnabled(false);
 
@@ -858,6 +919,7 @@ public class Dificil extends javax.swing.JFrame {
             ocultarTexto();
             jTextField1.setText(listaAux.get(index));
             activar();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton14ActionPerformed
 
@@ -873,9 +935,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton15.setText(lista.get(14));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton15.setEnabled(false);
 
@@ -884,6 +948,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             activar();
             ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton15ActionPerformed
 
@@ -899,9 +964,11 @@ public class Dificil extends javax.swing.JFrame {
             if (index != 16) {
                 jTextField1.setText(listaAux.get(index));
                 jButton13.setText(lista.get(12));
+                puntuacion++;
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
+                puntuacion = 16 + segundos;
             }
             jButton13.setEnabled(false);
 
@@ -910,6 +977,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             activar();
             ocultarTexto();
+            gestorPunt();
         }
     }//GEN-LAST:event_jButton13ActionPerformed
 
@@ -932,7 +1000,6 @@ public class Dificil extends javax.swing.JFrame {
         System.out.println(listaAux);
         System.out.println(lista);
         texto(listaAux);
-        jTextField1.setText(listaAux.get(index));
         jButton17.setEnabled(false);
 
     }//GEN-LAST:event_jButton17ActionPerformed
@@ -940,6 +1007,17 @@ public class Dificil extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        // TODO add your handling code here:
+        gestorPunt();
+        if(usu.getPuntuacion() < maxPunt){
+            usu.setPuntuacion(maxPunt);
+        }
+        Menu menu = new Menu(usu);
+        this.setVisible(false);
+        menu.setVisible(true);
+    }//GEN-LAST:event_jButton18ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -986,6 +1064,7 @@ public class Dificil extends javax.swing.JFrame {
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
