@@ -50,8 +50,7 @@ public class ControlDeUsuario extends javax.swing.JFrame {
         controladorUser = new ControladorUsuario (conexion);
         conexion.conectar();
         
-        users = controladorUser.obtenerUsuario();
-        
+        users = controladorUser.obtenerUsuario();       
     }
 
     /**
