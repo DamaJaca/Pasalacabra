@@ -8,7 +8,7 @@ package Modelo;
  *
  * @author usuario
  */
-public class Usuario implements Comparable{
+public class Usuario implements Comparable <Usuario>{
     private String nombre;
     private String contraseña;
     private Integer puntuacion;
@@ -51,12 +51,14 @@ public class Usuario implements Comparable{
     }
 
     @Override
-    public int compareTo(Object o) {
-        return nombre.compareTo(((Usuario)o).nombre);
-    }
-    public int comparePuntuacion(Object o){
-        return puntuacion.compareTo(((Usuario)o).puntuacion);
-    }
     
-    
+    public int compareTo(Usuario o) {
+        if (this.puntuacion < o.getPuntuacion() ) {
+            return -1;
+        } else if (this.puntuacion > o.getPuntuacion()) {
+            return 1;
+        } else {
+            return nombre.compareTo(((Usuario)o).nombre);
+        }
+    }
 }
