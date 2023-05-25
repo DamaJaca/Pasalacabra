@@ -52,6 +52,8 @@ public class ControlDeUsuario extends javax.swing.JFrame {
         
         users = controladorUser.obtenerUsuario();
         
+        System.out.println("Hola mundo");
+        
     }
 
     /**
