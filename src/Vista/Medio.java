@@ -9,14 +9,19 @@ import Controlador.ConexionMySQL;
 import Controlador.ControladorLista;
 import Modelo.Usuario;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.RoundRectangle2D;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.UIManager;
+import javax.swing.plaf.basic.BasicProgressBarUI;
 
 /**
  *
@@ -40,7 +45,7 @@ public class Medio extends javax.swing.JFrame {
     private Timer crono1;
     private Timer crono2;
     private int centesimas=99;
-    private int segundos=10;
+    private int segundos=9;
     Usuario user;
 
     public Medio(String listas, Usuario usuario) throws SQLException {
@@ -55,7 +60,31 @@ public class Medio extends javax.swing.JFrame {
         lista = controlador.obtenerTodaLaListas(listas);  // se carga la lista con la que vamos a trabajar
         crono1 = new Timer(10, accionesC1);
         crono2 = new Timer(10, accionesC2);
-
+        
+        pbCrono1.setUI(new BasicProgressBarUI(){
+            @Override
+            protected void paintDeterminate(Graphics g, JComponent c) {
+                Graphics2D g2d = (Graphics2D) g;
+                int ancho = (int) (pbCrono1.getWidth()*pbCrono1.getPercentComplete());
+                int alto = pbCrono1.getHeight();
+                g2d.setColor(Color.GREEN);
+                RoundRectangle2D barra = new RoundRectangle2D.Double(0,0,ancho,alto,0,0);
+                g2d.fill(barra);
+            }
+        });   
+        
+        pbCrono2.setUI(new BasicProgressBarUI(){
+            @Override
+            protected void paintDeterminate(Graphics g, JComponent c) {
+                Graphics2D g2d = (Graphics2D) g;
+                int ancho = (int) (pbCrono2.getWidth()*pbCrono2.getPercentComplete());
+                int alto = pbCrono2.getHeight();
+                g2d.setColor(Color.GREEN);
+                RoundRectangle2D barra = new RoundRectangle2D.Double(0,0,ancho,alto,0,0);
+                g2d.fill(barra);
+            }
+        });
+        
     }
     
     //Métodos
@@ -96,6 +125,36 @@ public class Medio extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Has perdido pedazo de CARICHIMBA");
     }
     
+    public void modificarBarra1(){
+        pbCrono1.setValue(pbCrono1.getValue()-1);
+    }
+    
+    public void vaciarBarra1(){
+        pbCrono1.setValue(0);
+    }
+    
+    public void modificarBarra2(){
+        pbCrono2.setValue(pbCrono2.getValue()-1);
+    }
+    
+    public void vaciarBarra2(){
+        pbCrono2.setValue(0);
+    }
+    
+    public void BarraRoja(){
+        pbCrono2.setUI(new BasicProgressBarUI(){
+            @Override
+            protected void paintDeterminate(Graphics g, JComponent c) {
+                Graphics2D g2d = (Graphics2D) g;
+                int ancho = (int) (pbCrono2.getWidth()*pbCrono2.getPercentComplete());
+                int alto = pbCrono2.getHeight();
+                g2d.setColor(Color.RED);
+                RoundRectangle2D barra = new RoundRectangle2D.Double(0,0,ancho,alto,0,0);
+                g2d.fill(barra);
+            }
+        });
+    }
+    
     public void ocultarPalabras(){
         b1.setText("1");
         b2.setText("2");
@@ -113,6 +172,7 @@ public class Medio extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
                 centesimas --;           
+                modificarBarra1();
                 if (centesimas == 0) {
                     segundos--;
                     centesimas=99;
@@ -124,6 +184,7 @@ public class Medio extends javax.swing.JFrame {
                     centesimas = 99;
                     segundos = 29;
                     crono1.stop();
+                    vaciarBarra1();
                     activarBotones();
                     ocultarPalabras();
                     crono2.start();
@@ -136,6 +197,7 @@ public class Medio extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {              
                 centesimas --;           
+                modificarBarra2();
                 if (centesimas == 0) {
                     segundos--;
                     centesimas=99;
@@ -143,12 +205,14 @@ public class Medio extends javax.swing.JFrame {
                 
                 if (segundos == 10) {
                     actualizarRojo();
+                    BarraRoja();
                 }
                 
                 actualizarTiempo();
                 
                 if (segundos==0 && centesimas == 1) {
                     crono2.stop();
+                    vaciarBarra2();
                     centesimas=0;
                     actualizarTiempo();
                     desactivarBotones();
@@ -180,6 +244,8 @@ public class Medio extends javax.swing.JFrame {
         b7 = new javax.swing.JButton();
         b9 = new javax.swing.JButton();
         tCronometro = new javax.swing.JTextField();
+        pbCrono2 = new javax.swing.JProgressBar();
+        pbCrono1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
@@ -272,26 +338,24 @@ public class Medio extends javax.swing.JFrame {
         tCronometro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tCronometro.setText("10:00");
 
+        pbCrono2.setBackground(new java.awt.Color(153, 204, 255));
+        pbCrono2.setMaximum(3000);
+        pbCrono2.setToolTipText("");
+        pbCrono2.setValue(2999);
+
+        pbCrono1.setBackground(new java.awt.Color(153, 204, 255));
+        pbCrono1.setMaximum(1000);
+        pbCrono1.setToolTipText("");
+        pbCrono1.setValue(999);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bComenzar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tpalabras, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)
-                        .addComponent(tCronometro, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(b1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(b2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(b3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(b4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,14 +363,29 @@ public class Medio extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(b8, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(b9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addComponent(b5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(b6, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(62, Short.MAX_VALUE))
+                                    .addComponent(b6, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(b8, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(b9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(bComenzar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tpalabras, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(pbCrono2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tCronometro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pbCrono1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(b1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(b2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(b3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,14 +405,18 @@ public class Medio extends javax.swing.JFrame {
                     .addComponent(b8, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b7, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b9, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(pbCrono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(tpalabras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bComenzar))
                     .addComponent(tCronometro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pbCrono2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3);
@@ -610,6 +693,8 @@ public class Medio extends javax.swing.JFrame {
     private javax.swing.JButton b9;
     private javax.swing.JButton bComenzar;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JProgressBar pbCrono1;
+    private javax.swing.JProgressBar pbCrono2;
     private javax.swing.JTextField tCronometro;
     private javax.swing.JTextField tpalabras;
     // End of variables declaration//GEN-END:variables
