@@ -46,6 +46,8 @@ public class Facil extends javax.swing.JFrame {
     private Timer crono2;
     private int centesimas = 99;
     private int segundos = 4;
+    private int puntuacion = 0;
+    private int maxPunt = 0;
     Usuario user;
 
     public Facil(String listas, Usuario usuario) throws SQLException {
@@ -106,6 +108,14 @@ public class Facil extends javax.swing.JFrame {
         b2.setEnabled(false);
         b3.setEnabled(false);
         b4.setEnabled(false);
+    }
+    
+    public void gestorPunt() {
+        if(puntuacion>maxPunt){
+            maxPunt = puntuacion;
+            puntuacion = 0;
+            tPuntuacion.setText(String.valueOf(maxPunt));
+        }
     }
 
     public void actualizarTiempo() {
@@ -240,8 +250,10 @@ public class Facil extends javax.swing.JFrame {
         jTCrono = new javax.swing.JTextField();
         pbCrono2 = new javax.swing.JProgressBar();
         pbCrono1 = new javax.swing.JProgressBar();
+        tPuntuacion = new javax.swing.JTextField();
+        bVolver = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
         jPanel3.setBackground(new java.awt.Color(153, 204, 255));
@@ -328,6 +340,19 @@ public class Facil extends javax.swing.JFrame {
         pbCrono1.setMaximum(500);
         pbCrono1.setValue(499);
 
+        tPuntuacion.setEditable(false);
+        tPuntuacion.setBackground(new java.awt.Color(255, 255, 204));
+        tPuntuacion.setForeground(new java.awt.Color(0, 0, 0));
+        tPuntuacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tPuntuacion.setText("0");
+
+        bVolver.setText("Volver");
+        bVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -337,21 +362,23 @@ public class Facil extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(b1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(b4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(b2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pbCrono1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTCrono, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(bComenzar, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                        .addComponent(jTextField1)
-                        .addComponent(pbCrono2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pbCrono1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTCrono)
+                            .addComponent(pbCrono2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bComenzar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField1)
+                            .addComponent(tPuntuacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(bVolver, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(b4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,7 +392,7 @@ public class Facil extends javax.swing.JFrame {
                     .addComponent(b4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pbCrono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -373,10 +400,14 @@ public class Facil extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pbCrono2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tPuntuacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bComenzar)
-                .addGap(110, 110, 110))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bVolver)
+                .addGap(81, 81, 81))
         );
 
         getContentPane().add(jPanel3);
@@ -394,20 +425,24 @@ public class Facil extends javax.swing.JFrame {
 
             contador++;
             index++;
+            puntuacion++;
             if (contador != 4) {
 
                 jTextField1.setText(listaAux.get(index));
             } else {
                 crono2.stop();
                 JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has ganado");
+                puntuacion = 4 + segundos;
                 
             }
-
+            gestorPunt();
+            
         } else {
             index = 0;
             jTextField1.setText(lista.get(index));
             activarBotones();
             contador = 0;
+            puntuacion = 0;
         }
 
     }//GEN-LAST:event_b1ActionPerformed
@@ -473,21 +508,25 @@ public class Facil extends javax.swing.JFrame {
             b4.setEnabled(false);
             contador++;
             index++;
+            puntuacion++;
             if (contador != 4) {
 
                 jTextField1.setText(listaAux.get(index));
             } else {
                 crono2.stop();
                 JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has ganado");
+                puntuacion = 4 + segundos;
               
             }
-
+            gestorPunt();
+            
         } else {
             index = 0;
             jTextField1.setText(lista.get(index));
             activarBotones();
             ocultarPalabra();
             contador = 0;
+            puntuacion = 0;
         }
     }//GEN-LAST:event_b4ActionPerformed
 
@@ -507,21 +546,25 @@ public class Facil extends javax.swing.JFrame {
 
             contador++;
             index++;
+            puntuacion++;
             if (contador != 4) {
 
                 jTextField1.setText(listaAux.get(index));
             } else {
                 crono2.stop();
                 JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has ganado");
+                puntuacion = 4 + segundos;
                 
             }
-
+            gestorPunt();
+            
         } else {
             index = 0;
             jTextField1.setText(lista.get(index));
             activarBotones();
             ocultarPalabra();
             contador = 0;
+            puntuacion = 0;
         }
     }//GEN-LAST:event_b2ActionPerformed
 
@@ -534,23 +577,37 @@ public class Facil extends javax.swing.JFrame {
 
             contador++;
             index++;
+            puntuacion++;
             if (contador != 4) {
 
                 jTextField1.setText(listaAux.get(index));
             } else {
                    crono2.stop();
                 JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has ganado");
+                puntuacion = 4 + segundos;
                
             }
-
+            gestorPunt();
+            
         } else {
             index = 0;
             jTextField1.setText(lista.get(index));
             activarBotones();
             ocultarPalabra();
             contador = 0;
+            puntuacion = 0;
         }
     }//GEN-LAST:event_b3ActionPerformed
+
+    private void bVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVolverActionPerformed
+        gestorPunt();
+        if(user.getPuntuacion() < maxPunt){
+            user.setPuntuacion(maxPunt);
+        }
+        Menu menu = new Menu(user);
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_bVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -600,10 +657,12 @@ public class Facil extends javax.swing.JFrame {
     private javax.swing.JButton b3;
     private javax.swing.JButton b4;
     private javax.swing.JButton bComenzar;
+    private javax.swing.JButton bVolver;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTCrono;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JProgressBar pbCrono1;
     private javax.swing.JProgressBar pbCrono2;
+    private javax.swing.JTextField tPuntuacion;
     // End of variables declaration//GEN-END:variables
 }
