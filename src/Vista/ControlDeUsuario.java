@@ -166,7 +166,48 @@ public class ControlDeUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_bConectarActionPerformed
 
     private void bRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRegistrarseActionPerformed
+        char [] input = psContraseña.getPassword();
+        if (tfNombre.getText().equalsIgnoreCase("Usuario")|| tfNombre.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(this, "Debe introducir un usuario", "ERROR!",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            if (String.valueOf(input).equalsIgnoreCase("Password")||String.valueOf(input).equalsIgnoreCase("")){
+                JOptionPane.showMessageDialog(this, "Debe introducir una contraseña util.", "ERROR!",
+                    JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        if (!tfNombre.getText().equalsIgnoreCase("Usuario") && !tfNombre.getText().equalsIgnoreCase("")){
+            if (!String.valueOf(input).equalsIgnoreCase("Password") && !String.valueOf(input).equalsIgnoreCase("")){
+                
+                condi= true;
+                for (int i=0; i<users.size();i++){
+                    if (users.get(i).getNombre().equalsIgnoreCase(tfNombre.getText()))
+                        condi=false;
+                }
+                if (condi){
+                    String consulta = "Insert into usuarios (nombre, contraseña, puntuacion) VALUES ('" + tfNombre.getText() + "', " + String.valueOf(psContraseña.getPassword()) + ", 0);";
+
+                    try {
+                        conexion.ejecutarInsetDeleteUpdate(consulta);
+                        JOptionPane.showMessageDialog(this, "Se ha creado correctamente el usuario " + tfNombre.getText(), "Registrado",
+                            JOptionPane.INFORMATION_MESSAGE);
+                        users=controladorUser.obtenerUsuario();
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ControlDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    } 
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Ya existe ese usuario. Intente con otro nombre", "ERROR!",
+                    JOptionPane.WARNING_MESSAGE);
+                }
+                
         
+
+            }
+        }
+                
     }//GEN-LAST:event_bRegistrarseActionPerformed
 
     private void tfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombreActionPerformed
