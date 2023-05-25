@@ -24,7 +24,7 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Menu
      * @param usuario
      */
-    Usuario user;
+    static Usuario user;
     
     public Menu(Usuario usuario) {
         initComponents();
@@ -62,13 +62,12 @@ public class Menu extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 204));
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
 
         jLabel1.setFont(new java.awt.Font("MV Boli", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -91,13 +90,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         jPanel4.setBackground(new java.awt.Color(0, 204, 204));
-        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
 
         jButton1.setBackground(new java.awt.Color(153, 204, 255));
         jButton1.setFont(new java.awt.Font("MV Boli", 1, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("PLAY");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -108,7 +105,6 @@ public class Menu extends javax.swing.JFrame {
         jButton5.setFont(new java.awt.Font("MV Boli", 1, 24)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("RECORDS");
-        jButton5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -139,7 +135,6 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 540, 69));
 
         jPanel5.setBackground(new java.awt.Color(0, 204, 204));
-        jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
 
         jLabel2.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -189,7 +184,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel7.setText("4x4");
 
         jPanel6.setBackground(new java.awt.Color(153, 204, 255));
-        jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         jPanel6.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setBackground(new java.awt.Color(204, 204, 204));
@@ -261,7 +255,6 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 540, 170));
 
         jPanel3.setBackground(new java.awt.Color(0, 204, 204));
-        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
 
         jLabel3.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -277,7 +270,6 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jPanel7.setBackground(new java.awt.Color(153, 204, 255));
-        jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("MV Boli", 1, 12)); // NOI18N
@@ -326,7 +318,7 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 540, 100));
 
-        getContentPane().add(jPanel1);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 613, 447));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -452,10 +444,8 @@ public class Menu extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Menu(users.get(i)).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Menu(user).setVisible(true);
         });
     }
 
