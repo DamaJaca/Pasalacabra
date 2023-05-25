@@ -27,8 +27,4 @@ public class ControladorLista {
         }
         return lista;
     }
-
-    public ArrayList<String> ObtenerTodaLaLista() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
