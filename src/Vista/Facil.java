@@ -516,11 +516,11 @@ public class Facil extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
+                /*try {
                     new Facil(listas).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(Facil.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }*/
             }
         });
     }

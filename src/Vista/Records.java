@@ -205,10 +205,10 @@ public class Records extends javax.swing.JFrame {
         ControladorUsuario controladora = new ControladorUsuario(conexion);
         try{
             ArrayList <Usuario> lista = controladora.obtenerUsuario();
-            Collections.sort(lista,);
+            Collections.sort(lista);
             DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
             for(int i=0; i<=lista.size();i++){
-                lista.
+                //lista.
             }
             int fila = 0, posi=0;
             for(Usuario usuario:lista){
