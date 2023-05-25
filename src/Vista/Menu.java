@@ -3,6 +3,7 @@ package Vista;
 
 import Modelo.Usuario;
 import java.awt.Color;
+import java.awt.Image;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,10 +25,11 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Menu
      * @param usuario
      */
-    static Usuario user;
+    Usuario user;
     
     public Menu(Usuario usuario) {
         initComponents();
+        Image icon = new ImageIcon(getClass().getResource("cabra(2).png")).getImage();
         user = new Usuario(usuario.getNombre(), usuario.getContraseña(), usuario.getPuntuacion());
     }
     /**
@@ -62,12 +64,13 @@ public class Menu extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
 
         jLabel1.setFont(new java.awt.Font("MV Boli", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -90,11 +93,13 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         jPanel4.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
 
         jButton1.setBackground(new java.awt.Color(153, 204, 255));
         jButton1.setFont(new java.awt.Font("MV Boli", 1, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("PLAY");
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -105,6 +110,7 @@ public class Menu extends javax.swing.JFrame {
         jButton5.setFont(new java.awt.Font("MV Boli", 1, 24)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("RECORDS");
+        jButton5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -135,6 +141,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 540, 69));
 
         jPanel5.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
 
         jLabel2.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -184,6 +191,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel7.setText("4x4");
 
         jPanel6.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         jPanel6.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setBackground(new java.awt.Color(204, 204, 204));
@@ -255,6 +263,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 540, 170));
 
         jPanel3.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
 
         jLabel3.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -270,6 +279,7 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jPanel7.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("MV Boli", 1, 12)); // NOI18N
@@ -318,7 +328,7 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 540, 100));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 613, 447));
+        getContentPane().add(jPanel1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -330,7 +340,15 @@ public class Menu extends javax.swing.JFrame {
             String titulo = "Error de selección";
             JOptionPane.showMessageDialog(null,mensaje,titulo,JOptionPane.ERROR_MESSAGE);
         }else{
-            
+            String imagen3 = "3.png";
+            ImageIcon icono3 = new ImageIcon(imagen3);
+            JOptionPane.showMessageDialog(null,"Comenzamos en: 3","Pasalacabra",JOptionPane.INFORMATION_MESSAGE,icono3);
+            String imagen2 = "2.png";
+            ImageIcon icono2 = new ImageIcon(imagen2);
+            JOptionPane.showMessageDialog(null,"Comenzamos en: 2","Pasalacabra",JOptionPane.INFORMATION_MESSAGE,icono2);
+            String imagen1 = "1.png";
+            ImageIcon icono1 = new ImageIcon(imagen1);
+            JOptionPane.showMessageDialog(null,"Comenzamos en: 1","Pasalacabra",JOptionPane.INFORMATION_MESSAGE,icono1);
             if(jLabel6.getText().equalsIgnoreCase("Facil")){
                 Facil partida;
                 try {
@@ -358,15 +376,6 @@ public class Menu extends javax.swing.JFrame {
                     System.out.println("NO FUNCIONA LA MIERDA ESTA");
                 }
             }
-            String imagen3 = "3.png";
-            ImageIcon icono3 = new ImageIcon(imagen3);
-            JOptionPane.showMessageDialog(null,"Comenzamos en: 3","Comenzamos",JOptionPane.INFORMATION_MESSAGE,icono3);
-            String imagen2 = "2.png";
-            ImageIcon icono2 = new ImageIcon(imagen2);
-            JOptionPane.showMessageDialog(null,"Comenzamos en: 2","Comenzamos",JOptionPane.INFORMATION_MESSAGE,icono2);
-            String imagen1 = "1.png";
-            ImageIcon icono1 = new ImageIcon(imagen1);
-            JOptionPane.showMessageDialog(null,"Comenzamos en: 1","Comenzamos",JOptionPane.INFORMATION_MESSAGE,icono1);
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -444,8 +453,10 @@ public class Menu extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new Menu(user).setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Menu(users.get(i)).setVisible(true);
+            }
         });
     }
 
