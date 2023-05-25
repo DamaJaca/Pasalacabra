@@ -6,6 +6,7 @@ package Vista;
 
 import Controlador.ConexionMySQL;
 import Controlador.ControladorLista;
+import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,7 +40,7 @@ public class Dificil extends javax.swing.JFrame {
     private int centesimas = 99;
     private int segundos = 3;
 
-    public Dificil(String listas) throws SQLException {
+    public Dificil(String listas, Usuario user) throws SQLException {
         System.out.println("aasiadsu");
         initComponents();
         arrayBotones();
