@@ -22,13 +22,13 @@ public class Menu extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
+     * @param usuario
      */
-    public Menu(Usuario user) {
-        initComponents();
-    }
+    Usuario user;
+    
     public Menu(Usuario usuario) {
         initComponents();
-        Usuario user = new Usuario(usuario.getNombre, usuario.getContraseña, usuario.getPuntuacion);
+        user = new Usuario(usuario.getNombre(), usuario.getContraseña(), usuario.getPuntuacion());
     }
     /**
      * This method is called from within the constructor to initialize the form.
