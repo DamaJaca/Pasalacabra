@@ -4,46 +4,165 @@ package Vista;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 import Controlador.ConexionMySQL;
 import Controlador.ControladorLista;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
- * @author usuario
+ * @author usuari
  */
 public class Facil extends javax.swing.JFrame {
 
     /**
      * Creates new form Facil
      */
-    
-
-    ArrayList<String> listaAux=new ArrayList();
     ConexionMySQL conexion;
     ControladorLista controlador;
+    int contador; // este contador nos va a permitir saber el número de aciertos que tiene el jugador
 
 // se crea una lista auxiliar donde vamos a guardar los datos para el random
     int index = 0;
+    ArrayList<String> listaAux = new ArrayList();
     ArrayList<String> lista;
+    static String listas;
+
+    private Timer crono1;
+    private Timer crono2;
+    private int centesimas = 99;
+    private int segundos = 5;
 
     public Facil(String listas) throws SQLException {
         initComponents();
         // colocamos en false los enable para que el jugador no pueda interactuar con los botones hasta que no empiece a jugar
-        jButton1.setEnabled(false);
-        jButton2.setEnabled(false);
-        jButton3.setEnabled(false);
-        jButton4.setEnabled(false);
-        conexion = new ConexionMySQL("pasapalabra", "root", "");   
+        b1.setEnabled(false);
+        b2.setEnabled(false);
+        b3.setEnabled(false);
+        b4.setEnabled(false);
+        conexion = new ConexionMySQL("pasapalabra", "root", "");
         controlador = new ControladorLista(conexion);
-        conexion.conectar();        
+        conexion.conectar();
         lista = controlador.obtenerTodaLaListas(listas);  // se carga la lista con la que vamos a trabajar
+        this.listas = listas;
+        contador = 0;
+        crono1 = new Timer(10, acciones);
+        crono2 = new Timer(10, accionesC2);
+    }
+    //Métodos
+
+    public void activarBotones() {
+
+        b1.setEnabled(true);
+        b2.setEnabled(true);
+        b3.setEnabled(true);
+        b4.setEnabled(true);
 
     }
+
+    public void desactivarBotones() {
+
+        b1.setEnabled(false);
+        b2.setEnabled(false);
+        b3.setEnabled(false);
+        b4.setEnabled(false);
+    }
+
+    public void actualizarTiempo() {
+        String tiempo = (segundos <= 9 ? "0" : "") + segundos + ":" + (centesimas <= 9 ? "0" : "") + centesimas;
+        jTCrono.setText(tiempo);
+    }
+
+    public void actualizarRojo() {
+        jTCrono.setForeground(Color.red);
+    }
+    public void mensajeDerrota(){
+    JOptionPane.showMessageDialog(this, "Has perdido Carajaula");
+    
+    
+    }
+
+    public void actualizarCrono() {
+        centesimas--;
+        if (centesimas == 0) {
+            segundos--;
+            centesimas = 99;
+        }
+
+        actualizarTiempo();
+    }
+
+    public void ocultarPalabra() {
+        b1.setText("1");
+        b2.setText("2");
+        b3.setText("3");
+        b4.setText("4");
+        jTextField1.setText(listaAux.get(index));
+        
+    }
+
+    private ActionListener acciones = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            centesimas--;
+            if (centesimas == 0) {
+                segundos--;
+                centesimas = 99;
+            }
+            
+            actualizarTiempo();
+
+            if (segundos == 0 && centesimas == 1) {
+                crono1.stop();
+                centesimas = 99;
+                segundos=19;
+                activarBotones();
+                ocultarPalabra();
+                crono2.start();
+               
+                
+            }
+
+            
+
+        }
+    };
+    
+    private ActionListener accionesC2 = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {              
+                centesimas --;           
+                if (centesimas == 0) {
+                    segundos--;
+                    centesimas=99;
+                }
+                
+                if (segundos == 10) {
+                    actualizarRojo();
+                }
+                
+                actualizarTiempo();
+                
+                if (segundos==0 && centesimas == 1) {
+                    crono2.stop();
+                    centesimas=0;
+                    actualizarTiempo();
+                    desactivarBotones();
+                    mensajeDerrota();
+                }
+                
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,12 +174,13 @@ public class Facil extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        b1 = new javax.swing.JButton();
+        b2 = new javax.swing.JButton();
+        b3 = new javax.swing.JButton();
+        b4 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        bComenzar = new javax.swing.JButton();
+        jTCrono = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
@@ -68,42 +188,52 @@ public class Facil extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(153, 204, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton1.setText("1");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        b1.setText("1");
+        b1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                b1MouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        b1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                b1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("2");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        b2.setText("2");
+        b2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                b2MouseClicked(evt);
             }
         });
-
-        jButton3.setText("3");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
-            }
-        });
-
-        jButton4.setText("4");
-        jButton4.setAutoscrolls(true);
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
-            }
-        });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        b2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                b2ActionPerformed(evt);
+            }
+        });
+
+        b3.setText("3");
+        b3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b3MouseClicked(evt);
+            }
+        });
+        b3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b3ActionPerformed(evt);
+            }
+        });
+
+        b4.setText("4");
+        b4.setAutoscrolls(true);
+        b4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b4MouseClicked(evt);
+            }
+        });
+        b4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b4ActionPerformed(evt);
             }
         });
 
@@ -116,10 +246,18 @@ public class Facil extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Comenzar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        bComenzar.setText("Comenzar");
+        bComenzar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                bComenzarActionPerformed(evt);
+            }
+        });
+
+        jTCrono.setEditable(false);
+        jTCrono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTCrono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTCronoActionPerformed(evt);
             }
         });
 
@@ -130,39 +268,42 @@ public class Facil extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(b1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(b4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(155, 155, 155)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
-                .addContainerGap(158, Short.MAX_VALUE))
+                    .addComponent(bComenzar, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addComponent(jTextField1)
+                    .addComponent(jTCrono))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(b2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
+                        .addGap(12, 12, 12)
+                        .addComponent(jTCrono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5)
+                        .addComponent(bComenzar)
                         .addGap(28, 129, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(b4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(b3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
         );
 
@@ -171,9 +312,33 @@ public class Facil extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void b1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+        if (lista.get(0).equals(jTextField1.getText())) {
+
+            b1.setText(lista.get(0));
+            b1.setEnabled(false);
+
+            contador++;
+            index++;
+            if (contador != 4) {
+
+                jTextField1.setText(listaAux.get(index));
+            } else {
+                crono2.stop();
+                JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has ganado");
+                
+            }
+
+        } else {
+            index = 0;
+            jTextField1.setText(lista.get(index));
+            activarBotones();
+            contador = 0;
+        }
+
+    }//GEN-LAST:event_b1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -181,110 +346,139 @@ public class Facil extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void b1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b1MouseClicked
         // TODO add your handling code here:
 
-        if (lista.get(0).equals(jTextField1.getText())) {
-            index++;
-            jTextField1.setText(listaAux.get(index));
-            jButton1.setText(lista.get(0));
-            jButton1.setEnabled(false);
 
-        } else {
-            index = 0;
-            jTextField1.setText(lista.get(index));
-            jButton1.setEnabled(true);
-            jButton2.setEnabled(true);
-            jButton3.setEnabled(true);
-            jButton4.setEnabled(true);
-        }
+    }//GEN-LAST:event_b1MouseClicked
 
-    }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void bComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bComenzarActionPerformed
         // TODO add your handling code here:
-
-        jButton1.setEnabled(true);
-        jButton2.setEnabled(true);
-        jButton3.setEnabled(true);
-        jButton4.setEnabled(true);
 
         Collections.shuffle(lista);
-        
-        for (int i = 0; i <= 3; i++) {
 
-        listaAux.add(lista.get(i));
+        for (int i = 0; i < 4; i++) {
+
+            listaAux.add(lista.get(i));
 
         }
         Collections.shuffle(listaAux);
 
-        jButton1.setText(lista.get(0));
-        jButton2.setText(lista.get(1));
-        jButton3.setText(lista.get(2));
-        jButton4.setText(lista.get(3));
-        jTextField1.setText(listaAux.get(index));
-        
+        b1.setText(lista.get(0));
+        b2.setText(lista.get(1));
+        b3.setText(lista.get(2));
+        b4.setText(lista.get(3));
 
-    }//GEN-LAST:event_jButton5ActionPerformed
+        crono1.start();
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+         bComenzar.setEnabled(false);
+    }//GEN-LAST:event_bComenzarActionPerformed
+
+    private void b2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b2MouseClicked
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_b2MouseClicked
+
+    private void b3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b3MouseClicked
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_b3MouseClicked
+
+    private void b4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b4MouseClicked
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_b4MouseClicked
+
+    private void b4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b4ActionPerformed
+        // TODO add your handling code here:
+
+        if (lista.get(3).equals(jTextField1.getText())) {
+
+            b4.setText(lista.get(3));
+            b4.setEnabled(false);
+            contador++;
+            index++;
+            if (contador != 4) {
+
+                jTextField1.setText(listaAux.get(index));
+            } else {
+                crono2.stop();
+                JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has ganado");
+              
+            }
+
+        } else {
+            index = 0;
+            jTextField1.setText(lista.get(index));
+            activarBotones();
+            ocultarPalabra();
+            contador = 0;
+        }
+    }//GEN-LAST:event_b4ActionPerformed
+
+    private void jTCronoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCronoActionPerformed
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_jTCronoActionPerformed
+
+    private void b2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b2ActionPerformed
         // TODO add your handling code here:
 
         if (lista.get(1).equals(jTextField1.getText())) {
+
+            b2.setText(lista.get(1));
+            b2.setEnabled(false);
+
+            contador++;
             index++;
-            jTextField1.setText(listaAux.get(index));
-            jButton2.setText(lista.get(1));
-            jButton2.setEnabled(false);
+            if (contador != 4) {
+
+                jTextField1.setText(listaAux.get(index));
+            } else {
+                crono2.stop();
+                JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has ganado");
+                
+            }
 
         } else {
             index = 0;
             jTextField1.setText(lista.get(index));
-            jButton1.setEnabled(true);
-            jButton2.setEnabled(true);
-            jButton3.setEnabled(true);
-            jButton4.setEnabled(true);
+            activarBotones();
+            ocultarPalabra();
+            contador = 0;
         }
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_b2ActionPerformed
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+    private void b3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b3ActionPerformed
         // TODO add your handling code here:
         if (lista.get(2).equals(jTextField1.getText())) {
+
+            b3.setText(lista.get(2));
+            b3.setEnabled(false);
+
+            contador++;
             index++;
-            jTextField1.setText(listaAux.get(index));
-            jButton3.setText(lista.get(2));
-            jButton3.setEnabled(false);
+            if (contador != 4) {
+
+                jTextField1.setText(listaAux.get(index));
+            } else {
+                   crono2.stop();
+                JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has ganado");
+               
+            }
 
         } else {
             index = 0;
             jTextField1.setText(lista.get(index));
-            jButton1.setEnabled(true);
-            jButton2.setEnabled(true);
-            jButton3.setEnabled(true);
-            jButton4.setEnabled(true);
+            activarBotones();
+            ocultarPalabra();
+            contador = 0;
         }
-    }//GEN-LAST:event_jButton3MouseClicked
-
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        // TODO add your handling code here:
-        if (lista.get(3).equals(jTextField1.getText())) {
-            index++;
-            jTextField1.setText(listaAux.get(index));
-            jButton4.setText(lista.get(3));
-            jButton4.setEnabled(false);
-
-        } else {
-            index = 0;
-            jTextField1.setText(lista.get(index));
-            jButton1.setEnabled(true);
-            jButton2.setEnabled(true);
-            jButton3.setEnabled(true);
-            jButton4.setEnabled(true);
-        }
-    }//GEN-LAST:event_jButton4MouseClicked
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_b3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,18 +513,23 @@ public class Facil extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Facil().setVisible(true);
+                try {
+                    new Facil(listas).setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Facil.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton b1;
+    private javax.swing.JButton b2;
+    private javax.swing.JButton b3;
+    private javax.swing.JButton b4;
+    private javax.swing.JButton bComenzar;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField jTCrono;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
