@@ -11,12 +11,14 @@ import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -52,6 +54,8 @@ public class Medio extends javax.swing.JFrame {
     public Medio(String listas, Usuario usuario) throws SQLException {
         initComponents();
         activarBotones();
+        Image icon = new ImageIcon(getClass().getResource("cabra(2).png")).getImage();
+        this.setIconImage(icon);
         user=usuario;
         bComenzar.setEnabled(true);
         conexion = new ConexionMySQL("pasapalabra", "root", "");   
@@ -269,29 +273,41 @@ public class Medio extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(153, 204, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        b1.setBackground(new java.awt.Color(204, 204, 255));
+        b1.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         b1.setText("1");
+        b1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         b1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b1ActionPerformed(evt);
             }
         });
 
+        b2.setBackground(new java.awt.Color(204, 204, 255));
+        b2.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         b2.setText("2");
+        b2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         b2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b2ActionPerformed(evt);
             }
         });
 
+        b3.setBackground(new java.awt.Color(204, 204, 255));
+        b3.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         b3.setText("3");
+        b3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         b3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b3ActionPerformed(evt);
             }
         });
 
+        b4.setBackground(new java.awt.Color(204, 204, 255));
+        b4.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         b4.setText("4");
         b4.setAutoscrolls(true);
+        b4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         b4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b4ActionPerformed(evt);
@@ -300,49 +316,69 @@ public class Medio extends javax.swing.JFrame {
 
         tPalabras.setEditable(false);
         tPalabras.setBackground(new java.awt.Color(255, 255, 204));
+        tPalabras.setFont(new java.awt.Font("MV Boli", 1, 14)); // NOI18N
         tPalabras.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        bComenzar.setBackground(new java.awt.Color(0, 204, 204));
+        bComenzar.setFont(new java.awt.Font("MV Boli", 1, 14)); // NOI18N
+        bComenzar.setForeground(new java.awt.Color(255, 255, 255));
         bComenzar.setText("Comenzar");
+        bComenzar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         bComenzar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bComenzarActionPerformed(evt);
             }
         });
 
+        b5.setBackground(new java.awt.Color(204, 204, 255));
+        b5.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         b5.setText("5");
         b5.setAutoscrolls(true);
+        b5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         b5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b5ActionPerformed(evt);
             }
         });
 
+        b6.setBackground(new java.awt.Color(204, 204, 255));
+        b6.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         b6.setText("6");
         b6.setAutoscrolls(true);
+        b6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         b6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b6ActionPerformed(evt);
             }
         });
 
+        b8.setBackground(new java.awt.Color(204, 204, 255));
+        b8.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         b8.setText("8");
         b8.setAutoscrolls(true);
+        b8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         b8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b8ActionPerformed(evt);
             }
         });
 
+        b7.setBackground(new java.awt.Color(204, 204, 255));
+        b7.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         b7.setText("7");
         b7.setAutoscrolls(true);
+        b7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         b7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b7ActionPerformed(evt);
             }
         });
 
+        b9.setBackground(new java.awt.Color(204, 204, 255));
+        b9.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         b9.setText("9");
         b9.setAutoscrolls(true);
+        b9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         b9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b9ActionPerformed(evt);
@@ -366,10 +402,15 @@ public class Medio extends javax.swing.JFrame {
 
         tPuntuacion.setEditable(false);
         tPuntuacion.setBackground(new java.awt.Color(255, 255, 204));
+        tPuntuacion.setFont(new java.awt.Font("MV Boli", 1, 14)); // NOI18N
         tPuntuacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tPuntuacion.setText("0");
 
+        bVolver.setBackground(new java.awt.Color(0, 204, 204));
+        bVolver.setFont(new java.awt.Font("MV Boli", 1, 14)); // NOI18N
+        bVolver.setForeground(new java.awt.Color(255, 255, 255));
         bVolver.setText("Volver");
+        bVolver.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         bVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bVolverActionPerformed(evt);
@@ -490,6 +531,7 @@ public class Medio extends javax.swing.JFrame {
         if (lista.get(0).equals(tPalabras.getText())) {
             b1.setText(lista.get(0));
             b1.setEnabled(false);
+            b1.setBackground(new Color(153, 255, 153));
             cont++;
             index++;
             puntuacion++;
@@ -507,6 +549,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
+            b1.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b1ActionPerformed
 
@@ -514,6 +557,7 @@ public class Medio extends javax.swing.JFrame {
         if (lista.get(1).equals(tPalabras.getText())) {
             b2.setText(lista.get(1));
             b2.setEnabled(false);
+            b2.setBackground(new Color(153, 255, 153));
             cont++;
             index++;
             puntuacion++;
@@ -531,6 +575,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
+            b2.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b2ActionPerformed
 
@@ -538,6 +583,7 @@ public class Medio extends javax.swing.JFrame {
         if (lista.get(2).equals(tPalabras.getText())) {
             b3.setText(lista.get(2));
             b3.setEnabled(false);
+            b3.setBackground(new Color(153, 255, 153));
             cont++;
             index++;
             puntuacion++;
@@ -555,6 +601,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
+            b3.setBackground(new Color(204, 204, 255));
         }
     }//GEN-LAST:event_b3ActionPerformed
 
@@ -562,6 +609,7 @@ public class Medio extends javax.swing.JFrame {
         if (lista.get(3).equals(tPalabras.getText())) {
             b4.setText(lista.get(3));
             b4.setEnabled(false);
+            b4.setBackground(new Color(153, 255, 153));
             cont++;
             index++;
             puntuacion++;
@@ -579,6 +627,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
+            b4.setBackground(new Color(204, 204, 255));
         }
     }//GEN-LAST:event_b4ActionPerformed
 
@@ -586,6 +635,7 @@ public class Medio extends javax.swing.JFrame {
         if (lista.get(4).equals(tPalabras.getText())) {
             b5.setText(lista.get(4));
             b5.setEnabled(false);
+            b5.setBackground(new Color(153, 255, 153));
             cont++;
             index++;
             puntuacion++;
@@ -603,6 +653,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
+            b5.setBackground(new Color(204, 204, 255));
         }
     }//GEN-LAST:event_b5ActionPerformed
 
@@ -610,6 +661,7 @@ public class Medio extends javax.swing.JFrame {
         if (lista.get(5).equals(tPalabras.getText())) {
             b6.setText(lista.get(5));
             b6.setEnabled(false);
+            b6.setBackground(new Color(153, 255, 153));
             cont++;
             index++;
             puntuacion++;
@@ -627,6 +679,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
+            b6.setBackground(new Color(204, 204, 255));
         }
     }//GEN-LAST:event_b6ActionPerformed
 
@@ -634,6 +687,7 @@ public class Medio extends javax.swing.JFrame {
         if (lista.get(6).equals(tPalabras.getText())) {
             b7.setText(lista.get(6));
             b7.setEnabled(false);
+            b7.setBackground(new Color(153, 255, 153));
             cont++;
             index++;
             puntuacion++;
@@ -651,6 +705,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
+            b7.setBackground(new Color(204, 204, 255));
         }
     }//GEN-LAST:event_b7ActionPerformed
 
@@ -658,6 +713,7 @@ public class Medio extends javax.swing.JFrame {
         if (lista.get(7).equals(tPalabras.getText())) {
             b8.setText(lista.get(7));
             b8.setEnabled(false);
+            b8.setBackground(new Color(153, 255, 153));
             cont++;
             index++;
             puntuacion++;
@@ -675,6 +731,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
+            b8.setBackground(new Color(204, 204, 255));
         }
     }//GEN-LAST:event_b8ActionPerformed
 
@@ -682,6 +739,7 @@ public class Medio extends javax.swing.JFrame {
         if (lista.get(8).equals(tPalabras.getText())) {
             b9.setText(lista.get(8));
             b9.setEnabled(false);
+            b9.setBackground(new Color(153, 255, 153));
             cont++;
             index++;
             puntuacion++;
@@ -699,6 +757,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
+            b9.setBackground(new Color(204, 204, 255));
         }
     }//GEN-LAST:event_b9ActionPerformed
 
