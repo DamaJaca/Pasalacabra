@@ -315,7 +315,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel3.setText("TEMÁTICA");
 
         jComboBox1.setFont(new java.awt.Font("MV Boli", 1, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Profesores", "Deportes", "Animales", "Música" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Profesores", "Deportes", "Animales" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -426,7 +426,6 @@ public class Menu extends javax.swing.JFrame {
                 Facil partida;
                 try {
                     partida = new Facil (jLabel9.getText(), user);
-                    System.out.println("Funca");
                     partida.setVisible(true);
                 } catch (SQLException ex) {
                     System.out.println("NO FUNCIONA LA MIERDA ESTA");
@@ -444,7 +443,6 @@ public class Menu extends javax.swing.JFrame {
                 Dificil partida;
                 try {
                     partida = new Dificil (jLabel9.getText(), user);
-                    System.out.println("Funca");
                     partida.setVisible(true);
                 } catch (SQLException ex) {
                     System.out.println("NO FUNCIONA LA MIERDA ESTA");
@@ -495,7 +493,6 @@ public class Menu extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // Boton PUNTUACIONES:
         Records listado = new Records ();
-        System.out.println("Funca la ventada records");
         listado.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 

@@ -51,7 +51,6 @@ public class Dificil extends javax.swing.JFrame {
     Usuario usu;
 
     public Dificil(String listas, Usuario user) throws SQLException {
-        System.out.println("aasiadsu");
         Image icon = new ImageIcon(getClass().getResource("cabra (2).png")).getImage();
         this.setIconImage(icon);
         usu = user;
@@ -136,7 +135,6 @@ public class Dificil extends javax.swing.JFrame {
         if(puntuacion>=maxPunt){
             maxPunt = puntuacion;
             tCronometro.setText(String.valueOf(maxPunt));
-            System.out.println("algo");
         }
     }
 
@@ -1265,8 +1263,6 @@ public class Dificil extends javax.swing.JFrame {
             listaAux.add(lista.get(i));
         }
         Collections.shuffle(listaAux);
-        System.out.println(listaAux);
-        System.out.println(lista);
         texto(listaAux);
         jButton17.setEnabled(false);
     }//GEN-LAST:event_jButton17ActionPerformed

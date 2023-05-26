@@ -535,12 +535,10 @@
                   <Font name="MV Boli" size="12" style="1"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="5">
-                    <StringItem index="0" value=""/>
-                    <StringItem index="1" value="Profesores"/>
-                    <StringItem index="2" value="Deportes"/>
-                    <StringItem index="3" value="Animales"/>
-                    <StringItem index="4" value="M&#xfa;sica"/>
+                  <StringArray count="3">
+                    <StringItem index="0" value="Profesores"/>
+                    <StringItem index="1" value="Deportes"/>
+                    <StringItem index="2" value="Animales"/>
                   </StringArray>
                 </Property>
               </Properties>
