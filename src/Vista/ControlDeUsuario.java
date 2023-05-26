@@ -234,7 +234,7 @@ public class ControlDeUsuario extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Bienvenido " +  users.get(i).getNombre(), "Se ha conectado",
                                 JOptionPane.INFORMATION_MESSAGE);
                         condi=false;
-                        Menu menu = new Menu (users.get(i));
+                        Menu menu = new Menu(users.get(i));
                         menu.setVisible(true);
                         this.dispose();
                     }

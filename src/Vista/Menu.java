@@ -1,6 +1,9 @@
 package Vista;
 
 
+import Controlador.ConexionMySQL;
+import Controlador.ControladorLista;
+import Controlador.ControladorUsuario;
 import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.Image;
@@ -26,12 +29,22 @@ public class Menu extends javax.swing.JFrame {
      * @param usuario
      */
     Usuario user;
+    ConexionMySQL conexion;
     
     public Menu(Usuario usuario) {
         initComponents();
         Image icon = new ImageIcon(getClass().getResource("cabra (2).png")).getImage();
         this.setIconImage(icon);
         user = new Usuario(usuario.getNombre(), usuario.getContraseña(), usuario.getPuntuacion());
+        conexion = new ConexionMySQL("pasapalabra", "root", "");
+        
+        try {
+            conexion.conectar();
+            conexion.ejecutarInsetDeleteUpdate("UPDATE usuarios SET puntuacion = "+usuario.getPuntuacion()+ " WHERE nombre = '"+usuario.getNombre()+"';");
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
