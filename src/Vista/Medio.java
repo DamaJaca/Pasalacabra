@@ -54,7 +54,7 @@ public class Medio extends javax.swing.JFrame {
     public Medio(String listas, Usuario usuario) throws SQLException {
         initComponents();
         activarBotones();
-        Image icon = new ImageIcon(getClass().getResource("cabra(2).png")).getImage();
+        Image icon = new ImageIcon(getClass().getResource("cabra (2).png")).getImage();
         this.setIconImage(icon);
         user=usuario;
         bComenzar.setEnabled(true);
