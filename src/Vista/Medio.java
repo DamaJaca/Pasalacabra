@@ -117,6 +117,25 @@ public class Medio extends javax.swing.JFrame {
             b9.setEnabled(true);
     }
     
+    public void recuperarbotones(){
+            b1.setBackground(new Color( 204, 204, 255));
+            b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
+            b5.setBackground(new Color( 204, 204, 255));
+            b6.setBackground(new Color( 204, 204, 255));
+            b7.setBackground(new Color( 204, 204, 255));
+            b8.setBackground(new Color( 204, 204, 255));
+            b9.setBackground(new Color( 204, 204, 255));
+    }
+    
+    public void revisarRecord(){
+        if (user.getPuntuacion()<maxPunt) {
+            user.setPuntuacion(maxPunt);
+            JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has conseguido un nuevo Record");
+        }
+    }
+    
     public void gestorPunt() {
         if(puntuacion>maxPunt){
             maxPunt = puntuacion;
@@ -550,15 +569,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b1.setBackground(new Color( 204, 204, 255));
-            b2.setBackground(new Color( 204, 204, 255));
-            b3.setBackground(new Color( 204, 204, 255));
-            b4.setBackground(new Color( 204, 204, 255));
-            b5.setBackground(new Color( 204, 204, 255));
-            b6.setBackground(new Color( 204, 204, 255));
-            b7.setBackground(new Color( 204, 204, 255));
-            b8.setBackground(new Color( 204, 204, 255));
-            b9.setBackground(new Color( 204, 204, 255));
+            recuperarbotones();
         }
     }//GEN-LAST:event_b1ActionPerformed
 
@@ -584,15 +595,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b1.setBackground(new Color( 204, 204, 255));
-            b2.setBackground(new Color( 204, 204, 255));
-            b3.setBackground(new Color( 204, 204, 255));
-            b4.setBackground(new Color( 204, 204, 255));
-            b5.setBackground(new Color( 204, 204, 255));
-            b6.setBackground(new Color( 204, 204, 255));
-            b7.setBackground(new Color( 204, 204, 255));
-            b8.setBackground(new Color( 204, 204, 255));
-            b9.setBackground(new Color( 204, 204, 255));
+            recuperarbotones();
         }
     }//GEN-LAST:event_b2ActionPerformed
 
@@ -618,15 +621,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b1.setBackground(new Color( 204, 204, 255));
-            b2.setBackground(new Color( 204, 204, 255));
-            b3.setBackground(new Color( 204, 204, 255));
-            b4.setBackground(new Color( 204, 204, 255));
-            b5.setBackground(new Color( 204, 204, 255));
-            b6.setBackground(new Color( 204, 204, 255));
-            b7.setBackground(new Color( 204, 204, 255));
-            b8.setBackground(new Color( 204, 204, 255));
-            b9.setBackground(new Color( 204, 204, 255));
+            recuperarbotones();
         }
     }//GEN-LAST:event_b3ActionPerformed
 
@@ -652,15 +647,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b1.setBackground(new Color( 204, 204, 255));
-            b2.setBackground(new Color( 204, 204, 255));
-            b3.setBackground(new Color( 204, 204, 255));
-            b4.setBackground(new Color( 204, 204, 255));
-            b5.setBackground(new Color( 204, 204, 255));
-            b6.setBackground(new Color( 204, 204, 255));
-            b7.setBackground(new Color( 204, 204, 255));
-            b8.setBackground(new Color( 204, 204, 255));
-            b9.setBackground(new Color( 204, 204, 255));
+            recuperarbotones();
         }
     }//GEN-LAST:event_b4ActionPerformed
 
@@ -686,15 +673,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b1.setBackground(new Color( 204, 204, 255));
-            b2.setBackground(new Color( 204, 204, 255));
-            b3.setBackground(new Color( 204, 204, 255));
-            b4.setBackground(new Color( 204, 204, 255));
-            b5.setBackground(new Color( 204, 204, 255));
-            b6.setBackground(new Color( 204, 204, 255));
-            b7.setBackground(new Color( 204, 204, 255));
-            b8.setBackground(new Color( 204, 204, 255));
-            b9.setBackground(new Color( 204, 204, 255));
+            recuperarbotones();
         }
     }//GEN-LAST:event_b5ActionPerformed
 
@@ -720,15 +699,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b1.setBackground(new Color( 204, 204, 255));
-            b2.setBackground(new Color( 204, 204, 255));
-            b3.setBackground(new Color( 204, 204, 255));
-            b4.setBackground(new Color( 204, 204, 255));
-            b5.setBackground(new Color( 204, 204, 255));
-            b6.setBackground(new Color( 204, 204, 255));
-            b7.setBackground(new Color( 204, 204, 255));
-            b8.setBackground(new Color( 204, 204, 255));
-            b9.setBackground(new Color( 204, 204, 255));
+            recuperarbotones();
         }
     }//GEN-LAST:event_b6ActionPerformed
 
@@ -754,15 +725,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b1.setBackground(new Color( 204, 204, 255));
-            b2.setBackground(new Color( 204, 204, 255));
-            b3.setBackground(new Color( 204, 204, 255));
-            b4.setBackground(new Color( 204, 204, 255));
-            b5.setBackground(new Color( 204, 204, 255));
-            b6.setBackground(new Color( 204, 204, 255));
-            b7.setBackground(new Color( 204, 204, 255));
-            b8.setBackground(new Color( 204, 204, 255));
-            b9.setBackground(new Color( 204, 204, 255));
+            recuperarbotones();
         }
     }//GEN-LAST:event_b7ActionPerformed
 
@@ -788,15 +751,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b1.setBackground(new Color( 204, 204, 255));
-            b2.setBackground(new Color( 204, 204, 255));
-            b3.setBackground(new Color( 204, 204, 255));
-            b4.setBackground(new Color( 204, 204, 255));
-            b5.setBackground(new Color( 204, 204, 255));
-            b6.setBackground(new Color( 204, 204, 255));
-            b7.setBackground(new Color( 204, 204, 255));
-            b8.setBackground(new Color( 204, 204, 255));
-            b9.setBackground(new Color( 204, 204, 255));
+            recuperarbotones();
         }
     }//GEN-LAST:event_b8ActionPerformed
 
@@ -822,15 +777,7 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b1.setBackground(new Color( 204, 204, 255));
-            b2.setBackground(new Color( 204, 204, 255));
-            b3.setBackground(new Color( 204, 204, 255));
-            b4.setBackground(new Color( 204, 204, 255));
-            b5.setBackground(new Color( 204, 204, 255));
-            b6.setBackground(new Color( 204, 204, 255));
-            b7.setBackground(new Color( 204, 204, 255));
-            b8.setBackground(new Color( 204, 204, 255));
-            b9.setBackground(new Color( 204, 204, 255));
+            recuperarbotones();
         }
     }//GEN-LAST:event_b9ActionPerformed
 
@@ -842,6 +789,7 @@ public class Medio extends javax.swing.JFrame {
         crono1.stop();
         crono2.stop();
         Menu menu = new Menu(user);
+        revisarRecord();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bVolverActionPerformed
@@ -849,6 +797,7 @@ public class Medio extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         crono1.stop();
         crono2.stop();
+        revisarRecord();
     }//GEN-LAST:event_formWindowClosing
 
     /**
