@@ -263,6 +263,11 @@ public class Medio extends javax.swing.JFrame {
         bVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
         jPanel3.setBackground(new java.awt.Color(153, 204, 255));
@@ -761,10 +766,17 @@ public class Medio extends javax.swing.JFrame {
         if(user.getPuntuacion() < maxPunt){
             user.setPuntuacion(maxPunt);
         }
+        crono1.stop();
+        crono2.stop();
         Menu menu = new Menu(user);
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bVolverActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        crono1.stop();
+        crono2.stop();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
