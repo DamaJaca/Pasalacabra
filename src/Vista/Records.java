@@ -27,7 +27,7 @@ public class Records extends javax.swing.JFrame {
     private ConexionMySQL conexion;
     public Records() {
         initComponents();
-        Image icon = new ImageIcon(getClass().getResource("cabra(2).png")).getImage();
+        Image icon = new ImageIcon(getClass().getResource("cabra (2).png")).getImage();
         this.setIconImage(icon);
         conexion = new ConexionMySQL("root","","compra");
     }
