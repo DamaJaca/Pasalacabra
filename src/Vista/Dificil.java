@@ -126,9 +126,18 @@ public class Dificil extends javax.swing.JFrame {
     }
     
     public void gestorPunt() {
-        if(puntuacion>maxPunt)
+        if(puntuacion>=maxPunt){
             maxPunt = puntuacion;
+        }
         puntuacion = 0;
+    }
+    
+    public void gestorPunt2() {
+        if(puntuacion>=maxPunt){
+            maxPunt = puntuacion;
+            tCronometro.setText(String.valueOf(maxPunt));
+            System.out.println("algo");
+        }
     }
 
     public void mensajeDerrota() {
@@ -158,6 +167,7 @@ public class Dificil extends javax.swing.JFrame {
         for (int i = 0; i < botones.size(); i++) {
             text = String.valueOf(i + 1);
             botones.get(i).setText(text);
+            botones.get(i).setBackground(new Color(204,204,255));
         }
     }
 
@@ -286,8 +296,8 @@ public class Dificil extends javax.swing.JFrame {
         });
 
         jTextField2.setEditable(false);
-        jTextField2.setBackground(new java.awt.Color(255, 255, 204));
-        jTextField2.setFont(new java.awt.Font("MV Boli", 1, 14)); // NOI18N
+        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField2.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -567,10 +577,10 @@ public class Dificil extends javax.swing.JFrame {
         pbCrono2.setToolTipText("");
         pbCrono2.setValue(2999);
 
-        tCronometro.setEditable(false);
-        tCronometro.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        tCronometro.setBackground(new java.awt.Color(255, 255, 204));
+        tCronometro.setFont(new java.awt.Font("MV Boli", 1, 14)); // NOI18N
         tCronometro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tCronometro.setText("10:00");
+        tCronometro.setText("0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -615,19 +625,21 @@ public class Dificil extends javax.swing.JFrame {
                             .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                            .addComponent(tCronometro))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pbCrono1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tCronometro, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pbCrono2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(pbCrono1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                                    .addComponent(jTextField2))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(pbCrono2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -641,11 +653,12 @@ public class Dificil extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -659,25 +672,25 @@ public class Dificil extends javax.swing.JFrame {
                     .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jButton17)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton18))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(pbCrono1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tCronometro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pbCrono2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jButton17)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton18)))
-                .addGap(16, 16, 16))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tCronometro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -705,10 +718,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton13.setText(lista.get(12));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton13.setEnabled(false);
 
@@ -718,8 +733,10 @@ public class Dificil extends javax.swing.JFrame {
             activar();
             ocultarTexto();
             gestorPunt();
+            gestorPunt2();
             jButton13.setBackground(new Color( 204, 204, 255));
         }
+        
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
@@ -735,10 +752,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton15.setText(lista.get(14));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton15.setEnabled(false);
 
@@ -749,6 +768,7 @@ public class Dificil extends javax.swing.JFrame {
             ocultarTexto();
             gestorPunt();
             jButton15.setBackground(new Color( 204, 204, 255));
+            gestorPunt2();
         }
     }//GEN-LAST:event_jButton15ActionPerformed
 
@@ -765,10 +785,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton14.setText(lista.get(13));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton14.setEnabled(false);
 
@@ -779,6 +801,7 @@ public class Dificil extends javax.swing.JFrame {
             activar();
             gestorPunt();
             jButton14.setBackground(new Color( 204, 204, 255));
+            gestorPunt2();
         }
     }//GEN-LAST:event_jButton14ActionPerformed
 
@@ -795,10 +818,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton9.setText(lista.get(8));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton9.setEnabled(false);
 
@@ -809,6 +834,7 @@ public class Dificil extends javax.swing.JFrame {
             activar();
             gestorPunt();
             jButton9.setBackground(new Color( 204, 204, 255));
+            gestorPunt2();
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -825,10 +851,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton16.setText(lista.get(15));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton16.setEnabled(false);
 
@@ -838,6 +866,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             activar();
             gestorPunt();
+            gestorPunt2();
             jButton16.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_jButton16ActionPerformed
@@ -855,10 +884,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton11.setText(lista.get(10));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton11.setEnabled(false);
 
@@ -868,6 +899,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             activar();
             gestorPunt();
+            gestorPunt2();
             jButton11.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_jButton11ActionPerformed
@@ -885,10 +917,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton10.setText(lista.get(9));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton10.setEnabled(false);
 
@@ -898,6 +932,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             activar();
             gestorPunt();
+            gestorPunt2();
             jButton10.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_jButton10ActionPerformed
@@ -915,10 +950,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton12.setText(lista.get(11));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton12.setEnabled(false);
 
@@ -928,6 +965,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             activar();
             gestorPunt();
+            gestorPunt2();
             jButton12.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_jButton12ActionPerformed
@@ -945,10 +983,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton8.setText(lista.get(7));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton8.setEnabled(false);
 
@@ -958,6 +998,7 @@ public class Dificil extends javax.swing.JFrame {
             jTextField1.setText(listaAux.get(index));
             activar();
             gestorPunt();
+            gestorPunt2();
             jButton8.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -975,10 +1016,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton7.setText(lista.get(6));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton7.setEnabled(false);
 
@@ -988,6 +1031,7 @@ public class Dificil extends javax.swing.JFrame {
             activar();
             ocultarTexto();
             gestorPunt();
+            gestorPunt2();
             jButton7.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -1005,10 +1049,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton6.setText(lista.get(5));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton6.setEnabled(false);
 
@@ -1018,6 +1064,7 @@ public class Dificil extends javax.swing.JFrame {
             activar();
             ocultarTexto();
             gestorPunt();
+            gestorPunt2();
             jButton6.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -1035,10 +1082,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton5.setText(lista.get(4));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton5.setEnabled(false);
 
@@ -1048,6 +1097,7 @@ public class Dificil extends javax.swing.JFrame {
             activar();
             ocultarTexto();
             gestorPunt();
+            gestorPunt2();
             jButton5.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -1065,10 +1115,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton4.setText(lista.get(3));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton4.setEnabled(false);
 
@@ -1078,6 +1130,7 @@ public class Dificil extends javax.swing.JFrame {
             activar();
             ocultarTexto();
             gestorPunt();
+            gestorPunt2();
             jButton4.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -1095,10 +1148,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton3.setText(lista.get(2));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton3.setEnabled(false);
 
@@ -1108,6 +1163,7 @@ public class Dificil extends javax.swing.JFrame {
             activar();
             ocultarTexto();
             gestorPunt();
+            gestorPunt2();
             jButton3.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -1125,10 +1181,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton2.setText(lista.get(1));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton2.setEnabled(false);
 
@@ -1138,6 +1196,7 @@ public class Dificil extends javax.swing.JFrame {
             activar();
             ocultarTexto();
             gestorPunt();
+            gestorPunt2();
             jButton2.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -1155,10 +1214,12 @@ public class Dificil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
                 jButton1.setText(lista.get(0));
                 puntuacion++;
+                gestorPunt2();
             }else{
                 crono2.stop();
                 JOptionPane.showMessageDialog(this, "Has ganado puto");
                 puntuacion = 16 + segundos;
+                gestorPunt2();
             }
             jButton1.setEnabled(false);
 
@@ -1168,6 +1229,7 @@ public class Dificil extends javax.swing.JFrame {
             ocultarTexto();
             activar();
             gestorPunt();
+            gestorPunt2();
             jButton1.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
