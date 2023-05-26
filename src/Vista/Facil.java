@@ -473,7 +473,10 @@ public class Facil extends javax.swing.JFrame {
             activarBotones();
             contador = 0;
             puntuacion = 0;
-            b1.setBackground(new Color(204, 204, 255));
+            b1.setBackground(new Color( 204, 204, 255));
+            b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
         }
 
     }//GEN-LAST:event_b1ActionPerformed
@@ -559,7 +562,10 @@ public class Facil extends javax.swing.JFrame {
             ocultarPalabra();
             contador = 0;
             puntuacion = 0;
-            b4.setBackground(new Color(204, 204, 255));
+            b1.setBackground(new Color( 204, 204, 255));
+            b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b4ActionPerformed
 
@@ -598,7 +604,10 @@ public class Facil extends javax.swing.JFrame {
             ocultarPalabra();
             contador = 0;
             puntuacion = 0;
-            b2.setBackground(new Color(204, 204, 255));
+            b1.setBackground(new Color( 204, 204, 255));
+            b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b2ActionPerformed
 
@@ -630,7 +639,10 @@ public class Facil extends javax.swing.JFrame {
             ocultarPalabra();
             contador = 0;
             puntuacion = 0;
-            b3.setBackground(new Color(204, 204, 255));
+            b1.setBackground(new Color( 204, 204, 255));
+            b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b3ActionPerformed
 
