@@ -48,7 +48,7 @@ public class ControlDeUsuario extends javax.swing.JFrame {
 }
     public ControlDeUsuario() throws SQLException {
         initComponents();
-        Image icon = new ImageIcon(getClass().getResource("cabra(2).png")).getImage();
+        Image icon = new ImageIcon(getClass().getResource("cabra (2).png")).getImage();
         this.setIconImage(icon);
         conexion = new ConexionMySQL("pasapalabra", "root", "");
         controladorUser = new ControladorUsuario (conexion);
