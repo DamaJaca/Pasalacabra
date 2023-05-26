@@ -274,7 +274,7 @@ public class ControlDeUsuario extends javax.swing.JFrame {
                         condi=false;
                 }
                 if (condi){
-                    String consulta = "Insert into usuarios (nombre, contraseña, puntuacion) VALUES ('" + tfNombre.getText() + "', " + String.valueOf(psContraseña.getPassword()) + ", 0);";
+                    String consulta = "Insert into usuarios VALUES ('" + tfNombre.getText() + "', '" + psContraseña.getText() + "', 0);";
 
                     try {
                         conexion.ejecutarInsetDeleteUpdate(consulta);

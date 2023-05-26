@@ -20,7 +20,7 @@ public class ControladorUsuario {
     }
     public ArrayList <Usuario> obtenerUsuario() throws SQLException {
         ArrayList <Usuario> lista= new ArrayList<>();
-        String consulta= "Select * From usuarios";
+        String consulta= "Select * From usuarios order by puntuacion desc";
         ResultSet rset = conexion.ejecutarSelect(consulta);
         while (rset.next()){
             String nombre= rset.getString("nombre");

@@ -132,7 +132,7 @@ public class Medio extends javax.swing.JFrame {
     public void revisarRecord(){
         if (user.getPuntuacion()<maxPunt) {
             user.setPuntuacion(maxPunt);
-            JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has conseguido un nuevo Record");
+            JOptionPane.showMessageDialog(rootPane, "¡Enhorabuena! has conseguido un nuevo Record");
         }
     }
     
@@ -154,7 +154,7 @@ public class Medio extends javax.swing.JFrame {
     }
     
     public void mensajeDerrota() {
-        JOptionPane.showMessageDialog(this, "Has perdido pedazo de CARICHIMBA");
+        JOptionPane.showMessageDialog(this, "Time Out - Prueba no superada");
     }
     
     public void modificarBarra1(){
@@ -559,7 +559,7 @@ public class Medio extends javax.swing.JFrame {
                 tPalabras.setText(listaAux.get(index));
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 9 + segundos;
             }
             gestorPunt();
@@ -585,7 +585,7 @@ public class Medio extends javax.swing.JFrame {
                 tPalabras.setText(listaAux.get(index));
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 9 + segundos;
             }
             gestorPunt();
@@ -611,7 +611,7 @@ public class Medio extends javax.swing.JFrame {
                 tPalabras.setText(listaAux.get(index));
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 9 + segundos;
             }
             gestorPunt();
@@ -637,7 +637,7 @@ public class Medio extends javax.swing.JFrame {
                 tPalabras.setText(listaAux.get(index));
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 9 + segundos;
             }
             gestorPunt();
@@ -663,7 +663,7 @@ public class Medio extends javax.swing.JFrame {
                 tPalabras.setText(listaAux.get(index));
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 9 + segundos;
             }
             gestorPunt();
@@ -689,7 +689,7 @@ public class Medio extends javax.swing.JFrame {
                 tPalabras.setText(listaAux.get(index));
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 9 + segundos;
             }
             gestorPunt();
@@ -715,7 +715,7 @@ public class Medio extends javax.swing.JFrame {
                 tPalabras.setText(listaAux.get(index));
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 9 + segundos;
             }
             gestorPunt();
@@ -741,7 +741,7 @@ public class Medio extends javax.swing.JFrame {
                 tPalabras.setText(listaAux.get(index));
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 9 + segundos;
             }
             gestorPunt();
@@ -767,7 +767,7 @@ public class Medio extends javax.swing.JFrame {
                 tPalabras.setText(listaAux.get(index));
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 9 + segundos;
             }
             gestorPunt();

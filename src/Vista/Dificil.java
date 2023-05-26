@@ -141,7 +141,7 @@ public class Dificil extends javax.swing.JFrame {
     }
 
     public void mensajeDerrota() {
-        JOptionPane.showMessageDialog(this, "Has perdido pedazo de CARICHIMBA");
+        JOptionPane.showMessageDialog(this, "Time Out - Prueba no superada");
     }
 
     private void desactivar() {
@@ -569,14 +569,14 @@ public class Dificil extends javax.swing.JFrame {
         });
 
         pbCrono1.setBackground(new java.awt.Color(153, 204, 255));
-        pbCrono1.setMaximum(1000);
+        pbCrono1.setMaximum(2000);
         pbCrono1.setToolTipText("");
-        pbCrono1.setValue(999);
+        pbCrono1.setValue(1999);
 
         pbCrono2.setBackground(new java.awt.Color(153, 204, 255));
-        pbCrono2.setMaximum(3000);
+        pbCrono2.setMaximum(6000);
         pbCrono2.setToolTipText("");
-        pbCrono2.setValue(2999);
+        pbCrono2.setValue(5999);
 
         tCronometro.setBackground(new java.awt.Color(255, 255, 204));
         tCronometro.setFont(new java.awt.Font("MV Boli", 1, 14)); // NOI18N
@@ -722,7 +722,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -756,7 +756,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -789,7 +789,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -822,7 +822,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -855,7 +855,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -888,7 +888,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -921,7 +921,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -954,7 +954,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -987,7 +987,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -1020,7 +1020,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -1053,7 +1053,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -1086,7 +1086,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -1119,7 +1119,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -1152,7 +1152,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -1185,7 +1185,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -1218,7 +1218,7 @@ public class Dificil extends javax.swing.JFrame {
                 gestorPunt2();
             }else{
                 crono2.stop();
-                JOptionPane.showMessageDialog(this, "Has ganado puto");
+                JOptionPane.showMessageDialog(this, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 16 + segundos;
                 gestorPunt2();
             }
@@ -1245,6 +1245,7 @@ public class Dificil extends javax.swing.JFrame {
         gestorPunt();
         if(usu.getPuntuacion() < maxPunt){
             usu.setPuntuacion(maxPunt);
+            JOptionPane.showMessageDialog(rootPane, "¡Enhorabuena! has conseguido un nuevo Record");
         }
         Menu menu = new Menu(usu);
         crono1.stop();

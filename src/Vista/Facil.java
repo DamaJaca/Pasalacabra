@@ -124,7 +124,7 @@ public class Facil extends javax.swing.JFrame {
     public void revisarRecord(){
         if (user.getPuntuacion()<maxPunt) {
             user.setPuntuacion(maxPunt);
-            JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has conseguido un nuevo Record");
+            JOptionPane.showMessageDialog(rootPane, "¡Enhorabuena! has conseguido un nuevo Record");
         }
     }
     
@@ -146,7 +146,7 @@ public class Facil extends javax.swing.JFrame {
     }
        
     public void mensajeDerrota(){
-    JOptionPane.showMessageDialog(this, "Has perdido Carajaula");
+    JOptionPane.showMessageDialog(this, "Time Out - Prueba no superada");
     
     
     }
@@ -476,7 +476,7 @@ public class Facil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
             } else {
                 crono2.stop();
-                JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has ganado");
+                JOptionPane.showMessageDialog(rootPane, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 4 + segundos;
                 
             }
@@ -561,7 +561,7 @@ public class Facil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
             } else {
                 crono2.stop();
-                JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has ganado");
+                JOptionPane.showMessageDialog(rootPane, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 4 + segundos;
               
             }
@@ -600,7 +600,7 @@ public class Facil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
             } else {
                 crono2.stop();
-                JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has ganado");
+                JOptionPane.showMessageDialog(rootPane, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 4 + segundos;
                 
             }
@@ -632,7 +632,7 @@ public class Facil extends javax.swing.JFrame {
                 jTextField1.setText(listaAux.get(index));
             } else {
                    crono2.stop();
-                JOptionPane.showMessageDialog(rootPane, "Enhorabuena! has ganado");
+                JOptionPane.showMessageDialog(rootPane, "¡Enhorabuena! Has hecho pleno");
                 puntuacion = 4 + segundos;
                
             }

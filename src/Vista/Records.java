@@ -29,7 +29,7 @@ public class Records extends javax.swing.JFrame {
         initComponents();
         Image icon = new ImageIcon(getClass().getResource("cabra (2).png")).getImage();
         this.setIconImage(icon);
-        conexion = new ConexionMySQL("root","","compra");
+        conexion = new ConexionMySQL("pasapalabra", "root", "");
     }
 
     /**
@@ -215,10 +215,9 @@ public class Records extends javax.swing.JFrame {
             ArrayList <Usuario> lista = controladora.obtenerUsuario();
             Collections.sort(lista);
             DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
-            for(int i=0; i<=lista.size();i++){
-                //lista.
-            }
             int fila = 0, posi=0;
+            modelo.setRowCount(0);
+            Collections.sort(lista);
             for(Usuario usuario:lista){
                 modelo.setNumRows(modelo.getRowCount()+1);
                 posi++;
