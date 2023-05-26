@@ -8,11 +8,13 @@ import Controlador.ConexionMySQL;
 import Controlador.ControladorLista;
 import Controlador.ControladorUsuario;
 import Modelo.Usuario;
+import java.awt.Image;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,6 +48,8 @@ public class ControlDeUsuario extends javax.swing.JFrame {
 }
     public ControlDeUsuario() throws SQLException {
         initComponents();
+        Image icon = new ImageIcon(getClass().getResource("cabra(2).png")).getImage();
+        this.setIconImage(icon);
         conexion = new ConexionMySQL("pasapalabra", "root", "");
         controladorUser = new ControladorUsuario (conexion);
         conexion.conectar();
@@ -93,6 +97,7 @@ public class ControlDeUsuario extends javax.swing.JFrame {
         bConectar.setFont(new java.awt.Font("MV Boli", 1, 14)); // NOI18N
         bConectar.setForeground(new java.awt.Color(255, 255, 255));
         bConectar.setText("Conectarse");
+        bConectar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         bConectar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bConectarActionPerformed(evt);
@@ -103,6 +108,7 @@ public class ControlDeUsuario extends javax.swing.JFrame {
         bRegistrarse.setFont(new java.awt.Font("MV Boli", 1, 14)); // NOI18N
         bRegistrarse.setForeground(new java.awt.Color(255, 255, 255));
         bRegistrarse.setText("Registrarse");
+        bRegistrarse.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         bRegistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bRegistrarseActionPerformed(evt);
@@ -127,13 +133,11 @@ public class ControlDeUsuario extends javax.swing.JFrame {
                     .addComponent(psContraseña))
                 .addGap(39, 39, 39))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bRegistrarse)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(bConectar)))
-                .addGap(0, 114, Short.MAX_VALUE))
+                .addGap(102, 102, 102)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bRegistrarse, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                    .addComponent(bConectar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,9 +148,9 @@ public class ControlDeUsuario extends javax.swing.JFrame {
                 .addComponent(psContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bConectar)
-                .addGap(16, 16, 16)
+                .addGap(18, 18, 18)
                 .addComponent(bRegistrarse)
-                .addGap(17, 17, 17))
+                .addGap(15, 15, 15))
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 204, 204));
@@ -208,7 +212,7 @@ public class ControlDeUsuario extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 340));

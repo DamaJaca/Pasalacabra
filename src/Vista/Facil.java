@@ -10,6 +10,7 @@ import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -52,6 +54,8 @@ public class Facil extends javax.swing.JFrame {
 
     public Facil(String listas, Usuario usuario) throws SQLException {
         initComponents();
+        Image icon = new ImageIcon(getClass().getResource("cabra(2).png")).getImage();
+        this.setIconImage(icon);
         // colocamos en false los enable para que el jugador no pueda interactuar con los botones hasta que no empiece a jugar
         b1.setEnabled(false);
         b2.setEnabled(false);
@@ -259,7 +263,10 @@ public class Facil extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(153, 204, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        b1.setBackground(new java.awt.Color(204, 204, 255));
+        b1.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         b1.setText("1");
+        b1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         b1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 b1MouseClicked(evt);
@@ -271,7 +278,10 @@ public class Facil extends javax.swing.JFrame {
             }
         });
 
+        b2.setBackground(new java.awt.Color(204, 204, 255));
+        b2.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         b2.setText("2");
+        b2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         b2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 b2MouseClicked(evt);
@@ -283,7 +293,10 @@ public class Facil extends javax.swing.JFrame {
             }
         });
 
+        b3.setBackground(new java.awt.Color(204, 204, 255));
+        b3.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         b3.setText("3");
+        b3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         b3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 b3MouseClicked(evt);
@@ -295,8 +308,11 @@ public class Facil extends javax.swing.JFrame {
             }
         });
 
+        b4.setBackground(new java.awt.Color(204, 204, 255));
+        b4.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
         b4.setText("4");
         b4.setAutoscrolls(true);
+        b4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         b4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 b4MouseClicked(evt);
@@ -310,6 +326,7 @@ public class Facil extends javax.swing.JFrame {
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(255, 255, 204));
+        jTextField1.setFont(new java.awt.Font("MV Boli", 1, 14)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,7 +334,11 @@ public class Facil extends javax.swing.JFrame {
             }
         });
 
+        bComenzar.setBackground(new java.awt.Color(0, 204, 204));
+        bComenzar.setFont(new java.awt.Font("MV Boli", 1, 14)); // NOI18N
+        bComenzar.setForeground(new java.awt.Color(255, 255, 255));
         bComenzar.setText("Comenzar");
+        bComenzar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         bComenzar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bComenzarActionPerformed(evt);
@@ -342,11 +363,15 @@ public class Facil extends javax.swing.JFrame {
 
         tPuntuacion.setEditable(false);
         tPuntuacion.setBackground(new java.awt.Color(255, 255, 204));
-        tPuntuacion.setForeground(new java.awt.Color(0, 0, 0));
+        tPuntuacion.setFont(new java.awt.Font("MV Boli", 1, 14)); // NOI18N
         tPuntuacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tPuntuacion.setText("0");
 
+        bVolver.setBackground(new java.awt.Color(0, 204, 204));
+        bVolver.setFont(new java.awt.Font("MV Boli", 1, 12)); // NOI18N
+        bVolver.setForeground(new java.awt.Color(255, 255, 255));
         bVolver.setText("Volver");
+        bVolver.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         bVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bVolverActionPerformed(evt);
@@ -387,7 +412,7 @@ public class Facil extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(b2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(b4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(b3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -422,7 +447,7 @@ public class Facil extends javax.swing.JFrame {
 
             b1.setText(lista.get(0));
             b1.setEnabled(false);
-
+            b1.setBackground(new Color(153, 255, 153));
             contador++;
             index++;
             puntuacion++;
@@ -443,6 +468,7 @@ public class Facil extends javax.swing.JFrame {
             activarBotones();
             contador = 0;
             puntuacion = 0;
+            b1.setBackground(new Color(204, 204, 255));
         }
 
     }//GEN-LAST:event_b1ActionPerformed
@@ -506,6 +532,7 @@ public class Facil extends javax.swing.JFrame {
 
             b4.setText(lista.get(3));
             b4.setEnabled(false);
+            b4.setBackground(new Color(153, 255, 153));
             contador++;
             index++;
             puntuacion++;
@@ -527,6 +554,7 @@ public class Facil extends javax.swing.JFrame {
             ocultarPalabra();
             contador = 0;
             puntuacion = 0;
+            b4.setBackground(new Color(204, 204, 255));
         }
     }//GEN-LAST:event_b4ActionPerformed
 
@@ -543,7 +571,7 @@ public class Facil extends javax.swing.JFrame {
 
             b2.setText(lista.get(1));
             b2.setEnabled(false);
-
+            b2.setBackground(new Color(153, 255, 153));
             contador++;
             index++;
             puntuacion++;
@@ -565,6 +593,7 @@ public class Facil extends javax.swing.JFrame {
             ocultarPalabra();
             contador = 0;
             puntuacion = 0;
+            b2.setBackground(new Color(204, 204, 255));
         }
     }//GEN-LAST:event_b2ActionPerformed
 
@@ -574,7 +603,7 @@ public class Facil extends javax.swing.JFrame {
 
             b3.setText(lista.get(2));
             b3.setEnabled(false);
-
+            b3.setBackground(new Color(153, 255, 153));
             contador++;
             index++;
             puntuacion++;
@@ -596,6 +625,7 @@ public class Facil extends javax.swing.JFrame {
             ocultarPalabra();
             contador = 0;
             puntuacion = 0;
+            b3.setBackground(new Color(204, 204, 255));
         }
     }//GEN-LAST:event_b3ActionPerformed
 
