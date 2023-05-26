@@ -10,12 +10,14 @@ import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -50,6 +52,8 @@ public class Dificil extends javax.swing.JFrame {
 
     public Dificil(String listas, Usuario user) throws SQLException {
         System.out.println("aasiadsu");
+        Image icon = new ImageIcon(getClass().getResource("cabra (2).png")).getImage();
+        this.setIconImage(icon);
         usu = user;
         initComponents();
         arrayBotones();
