@@ -550,6 +550,14 @@ public class Medio extends javax.swing.JFrame {
             cont=0;
             puntuacion=0;
             b1.setBackground(new Color( 204, 204, 255));
+            b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
+            b5.setBackground(new Color( 204, 204, 255));
+            b6.setBackground(new Color( 204, 204, 255));
+            b7.setBackground(new Color( 204, 204, 255));
+            b8.setBackground(new Color( 204, 204, 255));
+            b9.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b1ActionPerformed
 
@@ -575,7 +583,15 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
+            b1.setBackground(new Color( 204, 204, 255));
             b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
+            b5.setBackground(new Color( 204, 204, 255));
+            b6.setBackground(new Color( 204, 204, 255));
+            b7.setBackground(new Color( 204, 204, 255));
+            b8.setBackground(new Color( 204, 204, 255));
+            b9.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b2ActionPerformed
 
@@ -601,7 +617,15 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b3.setBackground(new Color(204, 204, 255));
+            b1.setBackground(new Color( 204, 204, 255));
+            b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
+            b5.setBackground(new Color( 204, 204, 255));
+            b6.setBackground(new Color( 204, 204, 255));
+            b7.setBackground(new Color( 204, 204, 255));
+            b8.setBackground(new Color( 204, 204, 255));
+            b9.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b3ActionPerformed
 
@@ -627,7 +651,15 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b4.setBackground(new Color(204, 204, 255));
+            b1.setBackground(new Color( 204, 204, 255));
+            b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
+            b5.setBackground(new Color( 204, 204, 255));
+            b6.setBackground(new Color( 204, 204, 255));
+            b7.setBackground(new Color( 204, 204, 255));
+            b8.setBackground(new Color( 204, 204, 255));
+            b9.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b4ActionPerformed
 
@@ -653,7 +685,15 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b5.setBackground(new Color(204, 204, 255));
+            b1.setBackground(new Color( 204, 204, 255));
+            b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
+            b5.setBackground(new Color( 204, 204, 255));
+            b6.setBackground(new Color( 204, 204, 255));
+            b7.setBackground(new Color( 204, 204, 255));
+            b8.setBackground(new Color( 204, 204, 255));
+            b9.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b5ActionPerformed
 
@@ -679,7 +719,15 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b6.setBackground(new Color(204, 204, 255));
+            b1.setBackground(new Color( 204, 204, 255));
+            b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
+            b5.setBackground(new Color( 204, 204, 255));
+            b6.setBackground(new Color( 204, 204, 255));
+            b7.setBackground(new Color( 204, 204, 255));
+            b8.setBackground(new Color( 204, 204, 255));
+            b9.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b6ActionPerformed
 
@@ -705,7 +753,15 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b7.setBackground(new Color(204, 204, 255));
+            b1.setBackground(new Color( 204, 204, 255));
+            b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
+            b5.setBackground(new Color( 204, 204, 255));
+            b6.setBackground(new Color( 204, 204, 255));
+            b7.setBackground(new Color( 204, 204, 255));
+            b8.setBackground(new Color( 204, 204, 255));
+            b9.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b7ActionPerformed
 
@@ -731,7 +787,15 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b8.setBackground(new Color(204, 204, 255));
+            b1.setBackground(new Color( 204, 204, 255));
+            b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
+            b5.setBackground(new Color( 204, 204, 255));
+            b6.setBackground(new Color( 204, 204, 255));
+            b7.setBackground(new Color( 204, 204, 255));
+            b8.setBackground(new Color( 204, 204, 255));
+            b9.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b8ActionPerformed
 
@@ -757,7 +821,15 @@ public class Medio extends javax.swing.JFrame {
             activarBotones();
             cont=0;
             puntuacion=0;
-            b9.setBackground(new Color(204, 204, 255));
+            b1.setBackground(new Color( 204, 204, 255));
+            b2.setBackground(new Color( 204, 204, 255));
+            b3.setBackground(new Color( 204, 204, 255));
+            b4.setBackground(new Color( 204, 204, 255));
+            b5.setBackground(new Color( 204, 204, 255));
+            b6.setBackground(new Color( 204, 204, 255));
+            b7.setBackground(new Color( 204, 204, 255));
+            b8.setBackground(new Color( 204, 204, 255));
+            b9.setBackground(new Color( 204, 204, 255));
         }
     }//GEN-LAST:event_b9ActionPerformed
 
