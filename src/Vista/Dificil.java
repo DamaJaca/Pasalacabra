@@ -8,14 +8,19 @@ import Controlador.ConexionMySQL;
 import Controlador.ControladorLista;
 import Modelo.Usuario;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.RoundRectangle2D;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.plaf.basic.BasicProgressBarUI;
 
 /**
  *
@@ -38,7 +43,7 @@ public class Dificil extends javax.swing.JFrame {
     private Timer crono1;
     private Timer crono2;
     private int centesimas = 99;
-    private int segundos = 3;
+    private int segundos = 19;
     private int puntuacion = 0;
     private int maxPunt = 0;
     Usuario usu;
@@ -55,6 +60,60 @@ public class Dificil extends javax.swing.JFrame {
         lista = controlador.obtenerTodaLaListas(listas);  // se carga la lista con la que vamos a trabajar
         crono1 = new Timer(10, accionesC1);
         crono2 = new Timer(10, accionesC2);
+        
+        pbCrono1.setUI(new BasicProgressBarUI(){
+            @Override
+            protected void paintDeterminate(Graphics g, JComponent c) {
+                Graphics2D g2d = (Graphics2D) g;
+                int ancho = (int) (pbCrono1.getWidth()*pbCrono1.getPercentComplete());
+                int alto = pbCrono1.getHeight();
+                g2d.setColor(Color.GREEN);
+                RoundRectangle2D barra = new RoundRectangle2D.Double(0,0,ancho,alto,0,0);
+                g2d.fill(barra);
+            }
+        });   
+        
+        pbCrono2.setUI(new BasicProgressBarUI(){
+            @Override
+            protected void paintDeterminate(Graphics g, JComponent c) {
+                Graphics2D g2d = (Graphics2D) g;
+                int ancho = (int) (pbCrono2.getWidth()*pbCrono2.getPercentComplete());
+                int alto = pbCrono2.getHeight();
+                g2d.setColor(Color.GREEN);
+                RoundRectangle2D barra = new RoundRectangle2D.Double(0,0,ancho,alto,0,0);
+                g2d.fill(barra);
+            }
+        });
+    }
+    
+    public void modificarBarra1(){
+        pbCrono1.setValue(pbCrono1.getValue()-1);
+    }
+    
+    public void vaciarBarra1(){
+        pbCrono1.setValue(0);
+    }
+    
+    public void modificarBarra2(){
+        pbCrono2.setValue(pbCrono2.getValue()-1);
+    }
+    
+    public void vaciarBarra2(){
+        pbCrono2.setValue(0);
+    }
+    
+    public void BarraRoja(){
+        pbCrono2.setUI(new BasicProgressBarUI(){
+            @Override
+            protected void paintDeterminate(Graphics g, JComponent c) {
+                Graphics2D g2d = (Graphics2D) g;
+                int ancho = (int) (pbCrono2.getWidth()*pbCrono2.getPercentComplete());
+                int alto = pbCrono2.getHeight();
+                g2d.setColor(Color.RED);
+                RoundRectangle2D barra = new RoundRectangle2D.Double(0,0,ancho,alto,0,0);
+                g2d.fill(barra);
+            }
+        });
     }
 
     public void actualizarTiempo() {
@@ -125,6 +184,7 @@ public class Dificil extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             centesimas--;
+            modificarBarra1();
             if (centesimas == 0) {
                 segundos--;
                 centesimas = 99;
@@ -134,8 +194,9 @@ public class Dificil extends javax.swing.JFrame {
 
             if (segundos == 0 && centesimas == 1) {
                 centesimas = 99;
-                segundos = 29;
+                segundos = 59;
                 crono1.stop();
+                vaciarBarra1();
                 activar();
                 ocultarTexto();
                 jTextField1.setText(listaAux.get(index));
@@ -149,17 +210,20 @@ public class Dificil extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             centesimas--;
+            modificarBarra2();
             if (centesimas == 0) {
                 segundos--;
                 centesimas = 99;
             }
             if (segundos == 10) {
                 actualizarRojo();
+                BarraRoja();
             }
             actualizarTiempo();
             if (segundos == 0 && centesimas == 1) {
                 crono2.stop();
                 centesimas = 0;
+                vaciarBarra2();
                 actualizarTiempo();
                 desactivar();
                 mensajeDerrota();
@@ -177,6 +241,7 @@ public class Dificil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSpinner1 = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -197,6 +262,8 @@ public class Dificil extends javax.swing.JFrame {
         jButton17 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jButton18 = new javax.swing.JButton();
+        pbCrono1 = new javax.swing.JProgressBar();
+        pbCrono2 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -424,6 +491,14 @@ public class Dificil extends javax.swing.JFrame {
             }
         });
 
+        pbCrono1.setBackground(new java.awt.Color(153, 204, 255));
+        pbCrono1.setMaximum(2000);
+        pbCrono1.setValue(1999);
+
+        pbCrono2.setBackground(new java.awt.Color(153, 204, 255));
+        pbCrono2.setMaximum(6000);
+        pbCrono2.setValue(5999);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -460,11 +535,13 @@ public class Dificil extends javax.swing.JFrame {
                                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(6, 6, 6)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                        .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                        .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                        .addComponent(pbCrono1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(pbCrono2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -502,15 +579,19 @@ public class Dificil extends javax.swing.JFrame {
                     .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(pbCrono1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pbCrono2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton18)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -1073,7 +1154,10 @@ public class Dificil extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JProgressBar pbCrono1;
+    private javax.swing.JProgressBar pbCrono2;
     // End of variables declaration//GEN-END:variables
 }
