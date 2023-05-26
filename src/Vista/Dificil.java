@@ -1151,10 +1151,16 @@ public class Dificil extends javax.swing.JFrame {
             usu.setPuntuacion(maxPunt);
         }
         Menu menu = new Menu(usu);
-        this.setVisible(false);
+        crono1.stop();
+        crono2.stop();
         menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton18ActionPerformed
-
+    
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {                                   
+        crono1.stop();
+        crono2.stop();
+    }      
     /**
      * @param args the command line arguments
      */
