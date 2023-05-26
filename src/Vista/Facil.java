@@ -54,7 +54,7 @@ public class Facil extends javax.swing.JFrame {
 
     public Facil(String listas, Usuario usuario) throws SQLException {
         initComponents();
-        Image icon = new ImageIcon(getClass().getResource("cabra(2).png")).getImage();
+        Image icon = new ImageIcon(getClass().getResource("cabra (2).png")).getImage();
         this.setIconImage(icon);
         // colocamos en false los enable para que el jugador no pueda interactuar con los botones hasta que no empiece a jugar
         b1.setEnabled(false);
