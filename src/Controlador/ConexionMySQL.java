@@ -12,6 +12,9 @@ import java.util.Calendar;
  *
  * @author usuario
  */
+
+
+//Prueba de commit
 public class ConexionMySQL {
     private String BD;
     private String USUARIO;
